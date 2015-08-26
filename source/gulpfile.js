@@ -45,7 +45,10 @@ gulp.task('less', function (cb) {
       .pipe(gulp.dest(lessOutputFolder))
       .pipe(uncss({
         html: [
-          '../app/browser_action/browser_action.html'
+          '../app/browser_action/browser_action.html',
+          '../app/donate.html',
+          '../app/quicksend.html',
+          '../app/wallet.html'
         ]
       }))
       .pipe(minifyCSS({keepBreaks: false}))

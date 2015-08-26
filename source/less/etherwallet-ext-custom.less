@@ -1,6 +1,7 @@
   #etherWalletPopUp {
-    padding: 5px 10px;
+    padding: 20px 8px;
     width: 300px;
+    position: relative;
 
   .settings-icon {
     position: absolute;
@@ -12,8 +13,23 @@
       outline: 0;
     }
   }
+  .back-icon {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+  }
   input[type=radio] {
     margin-right: 5px;
   }
-
+  label {
+    font-weight: normal;
+  }
+  table {
+    margin-bottom: 0;
+  }
 }
