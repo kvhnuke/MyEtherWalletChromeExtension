@@ -1,0 +1,99 @@
+/* Start Custom Styles */
+
+
+/* Make Bootstrap Go Full Width */
+.container {
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+textarea {
+  resize:vertical;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+h1, h2, .h1, .h2 {
+  font-weight: 300;
+}
+
+.radio label {
+  padding-right: 15px;
+}
+
+footer {
+  background-color: @ether-navy;
+  color: white;
+  margin-top: 50px;
+}
+
+.well {
+  h1:first-child, h2:first-child, h3:first-child, h4:first-child {
+    margin-top: 0;
+  }
+}
+
+ul, ol {
+  margin-top: 1em;
+  margin-bottom: 1.2em;
+}
+
+a {
+  cursor: pointer;
+}
+
+header {
+  @media screen and (max-width: @screen-sm) {
+    text-align: center;
+  }
+  p {
+    float: right;
+    font-size: 18px;
+    font-weight: 200;
+    margin-top: 23px;
+    @media screen and (max-width: @screen-sm) {
+      float: none;
+      text-align: center;
+    }
+  }
+
+  img {
+    float: left;
+    @media screen and (max-width: @screen-sm) {
+      float: none;
+    }
+  }
+}
+
+#paneHelp {
+  h3 {
+    margin-top: 2em;
+  }
+}
+

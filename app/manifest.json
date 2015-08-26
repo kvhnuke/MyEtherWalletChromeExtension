@@ -11,14 +11,14 @@
   },
   "default_locale": "en",
   "background": {
-    "page": "src/bg/background.html",
+    "page": "bg/background.html",
     "persistent": false
   },
-  "options_page": "src/options/index.html",
+  "options_page": "options/index.html",
   "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "browser action demo",
-    "default_popup": "src/browser_action/browser_action.html"
+    "default_popup": "browser_action/browser_action.html"
   },
   "permissions": [
     "clipboardWrite",
@@ -33,7 +33,7 @@
 		"http://*/*"
       ],
       "css": [
-        "src/inject/inject.css"
+        "inject/inject.css"
       ]
     },
     {
@@ -43,7 +43,7 @@
       ],
       "js": [
         "js/jquery.js",
-        "src/inject/inject.js"  
+        "inject/inject.js"
       ]
     }
   ]
