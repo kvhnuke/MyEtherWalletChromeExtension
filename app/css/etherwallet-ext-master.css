@@ -5510,7 +5510,7 @@ header img {
 }
 #etherWalletPopUp {
   padding: 20px 8px;
-  width: 300px;
+  width: 325px;
   position: relative;
 }
 #etherWalletPopUp .settings-icon {
@@ -5541,6 +5541,9 @@ header img {
 }
 #etherWalletPopUp table {
   margin-bottom: 0;
+}
+#etherWalletPopUp .form-group {
+  margin-bottom: .5em;
 }
 /* Custom Utilities */
 .text-navy {
