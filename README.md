@@ -1,0 +1,2 @@
+# MyEtherWalletChromeExtension
+Chrome Extension for MyEtherWallet functionalities
