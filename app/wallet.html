@@ -5,14 +5,18 @@
   <title>MyEtherWallet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,400,300,600" rel="stylesheet" type="text/css">
-  <link href="../css/etherwallet-ext-master.min.css" rel="stylesheet" type="text/css">
+  <link href="css/etherwallet-ext-master.min.css" rel="stylesheet" type="text/css">
+  <script src="js/jquery.js"></script>
+  <script src="js/etherwallet-ext-static.min.js"></script>
+  <script src="js/etherwallet-ext-master.min.js"></script>
+
 </head>
 <body>
 
 <header class="container-fluid bg-navy text-white">
 <section class="container">
   <img src="images/etherwallet-logo.png" height="70px" width="auto" alt="Ether Wallet" />
-  <p>Open Source, Client-Side, Javascript Ether Wallet</p>
+  <p>Open Source, Client-Side, Javascript Ether Wallet <strong><em>Chrome Extension!</em></strong></p>
 </section>
 </header>
 
@@ -21,10 +25,11 @@
 <!-- navtabs -->
 <section class="container">
   <ul class="nav nav-tabs">
-    <li class="active"><a id="generate-wallet" class="ptabs" showId="paneWalgen">         Generate Wallet   </a></li>
+    <li class="active"><a id="wallets" class="ptabs" showId="paneWallets">                Wallets   </a></li>
+    <li               ><a id="add-wallet" class="ptabs" showId="paneAddWallet">           Add New Wallet   </a></li>
+    <li               ><a id="generate-wallet" class="ptabs" showId="paneWalgen">         Generate Wallet   </a></li>
     <li>               <a id="bulk-generate" class="ptabs" showId="paneBulkgen">          Bulk Generate     </a></li>
     <li>               <a id="send-transaction" class="ptabs" showId="paneSendTrans">     Send Transaction  </a></li>
-    <li>               <a href="./contract-augur.html"> Augur Crowdsale</a></li>
     <li>               <a id="help" class="ptabs" showId="paneHelp">                      Help              </a></li>
     <li>               <a id="contact" class="ptabs" showId="paneContact">                Contact           </a></li>
   </ul>
@@ -36,10 +41,190 @@
 
   <div class="tab-content">
 
+<!-- Your Wallets -->
+    <div class="tab-pane" id="paneWallets">
+      <h2> Your Wallets </h2>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Wallet Nickname</th>
+            <th>Wallet Address</th>
+            <th>Balance</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>tayvano's wallet</td>
+            <td>0x0000000000000000000</td>
+            <td>1.39849834 ETH</td>
+            <td> <a href="#"> Edit </a></td>
+            <td> <a href="#SHOW_REMOVE_POP_UP"> Remove </a></td>
+          </tr>
+          <tr>
+            <td>tayvano's wallet</td>
+            <td>0x0000000000000000000</td>
+            <td>1.39849834 ETH</td>
+            <td> <a href="#"> Edit </a></td>
+            <td> <a href="#SHOW_REMOVE_POP_UP"> Remove </a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Modal -->
+        <div class="modal fade" id="removeWallet" tabindex="-1" role="dialog" aria-labelledby="removeWalletLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel"> <strong class="text-danger">Warning!</strong></h3>
+                </div>
+                <div class="modal-body">
+                  <h4>You are about to remove your wallet "<span> WALLET NICKNAME </span>.</h4>
+                  <p> If you want to use this wallet with your MyEtherWallet Chrome Extension in the future, you will need to re-add it.</
+                  <h4>Are you <span class="text-underline"> sure </span> you want to do this?</h4>
+                </div>
+                <div class="modal-footer text-center">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No, get me out of here!</button>
+                  <button type="button" class="btn btn-primary" id="btnapprovesend">Yes, I am sure! Remove the sucker.</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!--/modal-->
+
+    </div>
+<!-- End Your Wallets -->
+
+
+
+
+<!-- Add Wallet -->
+    <div class="tab-pane" id="paneAddWallet">
+      <h2> Add Wallet </h2>
+      <section class="row" id="walletselection">
+        <div class="col-md-4 col-sm-6">
+          <h4> How would you like to access your wallet? </h4>
+          <div class="radio">
+            <label><input type="radio" name="typeOfKeyRadio" value="fileupload">Upload your wallet file (Presale/Geth/etherwallet).</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="typeOfKeyRadio" value="pasteprivkey">Paste / type your private key (Encrypted/Unencrypted).</label>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <!-- if selected upload -->
+          <div id="selectedUploadKey"  style="display: none;">
+            <h4>Select your wallet file : </h4>
+            <div class="form-group">
+              <p id="file-text"></p>
+              <a class="file-input btn btn-block btn-default btn-file marg-v-sm" id="fileUpload">
+                SELECT WALLET FILE... <input type="file">
+              </a>
+              <div id="fuploadStatus"></div>
+            </div>
+            <div class="form-group" id="walletPasdiv" style="display: none;">
+              <p> your file is encrypted with a password, enter the password here: </p>
+              <input class="form-control" type="password" placeholder="Password" id="walletfilepassword">
+            </div>
+          </div>
+          <!-- /if selected upload -->
+          <!-- if selected type key-->
+          <div id="selectedTypeKey"  style="display: none;">
+            <h4> Paste / type your private key: </h4>
+            <div class="form-group">
+              <textarea rows="4" class="form-control" placeholder="Private Key" id="manualprivkey"></textarea>
+            </div>
+            <div class="form-group" style="display: none;" id="divprikeypassword">
+              <p> Your file is encrypted with a password, enter the password here: </p>
+              <input class="form-control" type="password" placeholder="Password" id="privkeypassword">
+            </div>
+          </div>
+          <!-- /if selected type key-->
+        </div>
+        <div class="col-md-4 col-sm-6" style="display: none;" id="walletuploadbutton">
+          <h4 id="uploadbtntxt-wallet" style="display: none;"> Decrypt your wallet</h4>
+          <h4 id="uploadbtntxt-privkey" style="display: none;"> Decrypt your private key </h4>
+          <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">DECRYPT</a></div>
+          <div id="decryptStatus"></div>
+        </div>
+      </section>
+      <section class="row" id="wallettransactions" style="display: none;">
+        <hr />
+        <div class="col-sm-4">
+          <h4> Account Information </h4>
+          <div>
+            <p> Account Address: <br /> <strong id="accountAddress" style="margin-left: 1em"></strong></p>
+            <p> Account Balance: <br />
+              <strong class="text-success" id="accountBalance" style="margin-left: 1em"> loading... </strong>
+              <br />
+              <strong class="text-success" id="accountBalanceUsd" style="margin-left: 1em"> loading... </strong>
+              <br />
+              <strong class="text-success" id="accountBalanceEur" style="margin-left: 1em"> loading... </strong>
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <h4>Add Wallet</h4>
+          <div class="form-group col-xs-12">
+            <label> Create a Nickname for Your Wallet: </label>
+            <input class="form-control" type="text" placeholder="tayvano's pre-sale wallet">
+          </div>
+          <div class="form-group col-xs-12">
+            <label> Create a PIN for Your Wallet: </label>
+            <p>You will need to enter this PIN each time you send a transaction from the Chrome Extension. Please use at least 8 characters and do not use a password you use elsewhere. If you forget this PIN, just delete your wallet and re-add it.</p>
+            <input class="form-control" type="text" placeholder="PIN">
+          </div>
+
+          <div class="form-group col-xs-12">
+            <a class="btn btn-info btn-block">ADD WALLET </a>
+          </div>
+          <div id="txcreatestatus"></div>
+          <div class="form-group col-xs-12" style="display: none;" id="divtransactionTAs">
+              <label> Raw Transaction </label>
+            <textarea class="form-control" rows="4" disabled id="tarawtx"></textarea>
+              <label> Signed Transaction </label>
+            <textarea class="form-control" rows="4" disabled id="tasignedtx"></textarea>
+          </div>
+          <div class="form-group col-xs-12" id="divsendtranaction" style="display: none;">
+            <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#sendTransaction">Add Wallet</a>
+          </div>
+          <div id="txsendstatus"></div>
+          <!-- Modal -->
+          <div class="modal fade" id="sendTransaction" tabindex="-1" role="dialog" aria-labelledby="sendTransactionLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel"> <strong class="text-danger">Warning!</strong></h3>
+                  </div>
+                  <div class="modal-body">
+                    <h4>
+                      You are about to send
+                      <strong id="confirmAmount" class="text-primary"> 345 </strong>
+                      <strong id="confirmCurrancy" class="text-primary"> Ether </strong>
+                      to address
+                      <strong id="confirmAddress" class="text-primary"> 928342938472938 </strong>
+                    </h4>
+                    <h4> Are you <span class="text-underline"> sure </span> you want to do this?</h4>
+                  </div>
+                  <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No, get me out of here!</button>
+                    <button type="button" class="btn btn-primary" id="btnapprovesend">Yes, I am sure! Make transaction.</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!--/modal-->
+        </div>
+      </section>
+    </div> <!-- /Add Wallet -->
 
 
     <!-- wallet generator -->
-    <div class="tab-pane active" id="paneWalgen">
+    <div class="tab-pane active" id="paneWalgen"  style="display: none;">
       <h2> Generate Wallet </h2>
       <div class="row">
         <div class="col-sm-6">
@@ -160,51 +345,39 @@
     <!-- send transaction -->
     <div class="tab-pane" id="paneSendTrans" style="display: none;">
       <h2> Send Transaction </h2>
-      <section class="row" id="walletselection">
+      <section id="walletselection" class="row">
         <div class="col-md-4 col-sm-6">
-          <h4> How would you like to access your wallet? </h4>
-          <div class="radio">
-            <label><input type="radio" name="typeOfKeyRadio" value="fileupload">Upload your wallet file (Presale/Geth/etherwallet).</label>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="typeOfKeyRadio" value="pasteprivkey">Paste / type your private key (Encrypted/Unencrypted).</label>
-          </div>
+          <h4> Select a Wallet: </h4>
+          <table width="100%" class="table table-striped table-condensed">
+            <tbody>
+              <tr>
+                <td>
+                  <label><input type="radio" name="selectedWallet" value="taylors-wallet">
+                  Taylor's Wallet</label>
+                </td>
+                <td> 1 ETH </td>
+              </tr>
+              <tr>
+                <td>
+                  <label><input type="radio" name="selectedWallet" value="taylors-2nd-wallet">
+                  Taylor's 2nd Wallet</label>
+                </td>
+                <td> 2 ETH </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="col-md-4 col-sm-6">
-          <!-- if selected upload -->
-          <div id="selectedUploadKey"  style="display: none;">
-            <h4>Select your wallet file : </h4>
-            <div class="form-group">
-              <p id="file-text"></p>
-              <a class="file-input btn btn-block btn-default btn-file marg-v-sm" id="fileUpload">
-                SELECT WALLET FILE... <input type="file">
-              </a>
-              <div id="fuploadStatus"></div>
-            </div>
-            <div class="form-group" id="walletPasdiv" style="display: none;">
-              <p> your file is encrypted with a password, enter the password here: </p>
-              <input class="form-control" type="password" placeholder="Password" id="walletfilepassword">
-            </div>
-          </div>
-          <!-- /if selected upload -->
-          <!-- if selected type key-->
-          <div id="selectedTypeKey"  style="display: none;">
-            <h4> Paste / type your private key: </h4>
-            <div class="form-group">
-              <textarea rows="4" class="form-control" placeholder="Private Key" id="manualprivkey"></textarea>
-            </div>
-            <div class="form-group" style="display: none;" id="divprikeypassword">
-              <p> Your file is encrypted with a password, enter the password here: </p>
-              <input class="form-control" type="password" placeholder="Password" id="privkeypassword">
-            </div>
-          </div>
-          <!-- /if selected type key-->
+          <h4> Enter PIN for this Wallet: </h4>
+          <input class="form-control" type="text" placeholder="PIN">
         </div>
-        <div class="col-md-4 col-sm-6" style="display: none;" id="walletuploadbutton">
-          <h4 id="uploadbtntxt-wallet" style="display: none;"> Decrypt your wallet</h4>
-          <h4 id="uploadbtntxt-privkey" style="display: none;"> Decrypt your private key </h4>
+        <div class="col-md-4 col-sm-6" id="walletuploadbutton">
+          <h4 id="uploadbtntxt-wallet"> Decrypt Wallet:</h4>
           <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">DECRYPT</a></div>
           <div id="decryptStatus"></div>
+        </div>
+
+
         </div>
       </section>
       <section class="row" id="wallettransactions" style="display: none;">
