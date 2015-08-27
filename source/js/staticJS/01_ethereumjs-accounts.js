@@ -77,11 +77,8 @@ var Accounts = module.exports = function(options){
     defineProperties(this);
     
     // get accounts object, if any
-    var accounts = LocalStore.get(this.options.varName);
-    
-    // if no accounts object exists, create one
-    if(_.isUndefined(accounts) || !_.isObject(accounts))
-        LocalStore.set(this.options.varName, {});
+    var accounts = {};
+
 };
 
 
@@ -261,17 +258,7 @@ This will set in browser accounts data at a specified address with the specified
 **/
 
 Accounts.prototype.set = function(address, accountObject){
-    var accounts = LocalStore.get('ethereumAccounts');    
     
-    // if object, store; if null, delete
-    if(_.isObject(accountObject))
-        accounts[formatAddress(address)] = accountObject;   
-    else
-        delete accounts[formatAddress(address)];
-    
-    this.log('Setting account object at address: ' + address + ' to account object ' + String(accountObject));
-    
-    LocalStore.set(this.options.varName, accounts);
 };
 
 
@@ -352,13 +339,7 @@ Select the account that will be used when transactions are made.
 **/
 
 Accounts.prototype.select = function(address) {
-    var accounts = LocalStore.get(this.options.varName);
     
-    if(!this.contains(address))
-        return;
-    
-    accounts['selected'] = address;
-    LocalStore.set(this.options.varName, accounts);
 };
 
 
@@ -371,43 +352,7 @@ Get an account object that is stored in local browser storage. If encrypted, dec
 **/
 
 Accounts.prototype.get = function(address, passphrase){
-    var accounts = LocalStore.get(this.options.varName);    
     
-    if(_.isUndefined(address) || _.isEmpty(address))
-        return accounts;
-    
-    if(address == 'selected')
-        address = accounts.selected;
-    
-    var accountObject = {};    
-    address = formatAddress(address);
-    
-    if(!this.contains(address))
-        return accountObject;
-    
-    accountObject = accounts[address];
-    
-    if(_.isEmpty(accountObject))
-        return accountObject;
-    
-    // If a passphrase is provided, decrypt private and public key
-    if(this.isPassphrase(passphrase) && accountObject.encrypted) {
-        try {
-            accountObject.private = CryptoJS.AES
-                .decrypt(accountObject.private, passphrase)
-                .toString(CryptoJS.enc.Utf8);
-            accountObject.public = CryptoJS.AES
-                .decrypt(accountObject.public, passphrase)
-                .toString(CryptoJS.enc.Utf8);
-            
-            if(ethUtil.sha3(accountObject.public + accountObject.private).toString('hex') == accountObject.hash)
-                accountObject.locked = false;
-        }catch(e){
-            this.log('Error while decrypting public/private keys: ' + String(e));
-        }
-    }
-    
-    return accountObject;
 };
 
 
@@ -418,8 +363,7 @@ Clear all stored Ethereum accounts in browser.
 **/
 
 Accounts.prototype.clear = function(){
-    this.log('Clearing all accounts');
-    LocalStore.set(this.options.varName, {});
+    
 };
 
 
@@ -432,20 +376,7 @@ Does the account exist in browser storage, given the specified account address.
 **/
 
 Accounts.prototype.contains = function(address){
-    var accounts = LocalStore.get(this.options.varName);
     
-    if(_.isUndefined(address)
-       || _.isEmpty(address))
-        return false;
-    
-    // Add '0x' prefix if not available
-    address = formatAddress(address);
-    
-    // If account with address exists.
-    if(_.has(accounts, address))
-        return (!_.isUndefined(accounts[address]) && !_.isEmpty(accounts[address]));
-    
-    return false;
 };
 
 
@@ -528,15 +459,7 @@ Return all accounts as a list array.
 **/
 
 Accounts.prototype.list = function(){
-    var accounts = LocalStore.get('ethereumAccounts'),
-        return_array = [];
     
-    _.each(_.keys(accounts), function(accountKey, accountIndex){
-       if(accountKey != "selected")
-           return_array.push(accounts[accountKey]);
-    });
-        
-    return return_array;
 };
 
 
@@ -29470,7 +29393,6 @@ var LocalStore = module.exports = {
         }
     },
 	set: function(key, value, options, callback){
-
         this._ensureDeps(key);
 
 		// USE CHROME STORAGE
@@ -29517,7 +29439,6 @@ var LocalStore = module.exports = {
 		}
 	},
 	get: function(key, options, callback){
-
         this._ensureDeps(key);
 
 

@@ -21,11 +21,13 @@
     "default_popup": "browser_action/browser_action.html"
   },
   "permissions": [
+    "storage", 
     "clipboardWrite",
     "notifications",
     "https://*/*",
     "http://*/*"
   ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
       "matches": [
