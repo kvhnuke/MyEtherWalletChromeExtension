@@ -37,6 +37,8 @@ function onTabOpen(tabid) {
 		setNickNames();
 	} else if (tabid == 'wallets') {
 		reloadMainPageWallets();
+	} else if (tabid == 'send-transaction') {
+		setSendTransactionWallets();
 	}
 }
 
@@ -73,6 +75,12 @@ function bindElements() {
 		$("#decryptStatus").html('<p class="text-center text-info"><strong> Please Wait...</strong></p>').fadeIn(10);
 		setTimeout(function() {
 			decryptFormData();
+		}, 100);
+	});
+	$("#decryptSendTx").click(function() {
+		$("#decryptStatusSendTx").html('<p class="text-center text-info"><strong> Please Wait...</strong></p>').fadeIn(10);
+		setTimeout(function() {
+			decryptSendTxData();
 		}, 100);
 	});
 	$("#generateNewWallet").click(function() {
@@ -214,7 +222,7 @@ function setNickNames() {
 function preSendTransaction() {
 	sendTransaction($("#tasignedtx").val(), function(data) {
 		$("#txsendstatus").html('<p class="text-center text-success"><strong> Transaction submitted. TX ID: ' + data + '</strong></p>');
-		setWalletBalance();
+		setWalletBalance(1);
 	}, function(err) {
 		$("#txsendstatus").html('<p class="text-center text-danger"><strong>' + err + '</strong></p>');
 	});
@@ -261,6 +269,18 @@ function getSuccessText(text) {
 	return '<p class="text-center text-success"><strong> ' + text + '</strong></p>';
 }
 
+function setSendTransactionWallets() {
+	getWalletsArr(function(wallets) {
+		$("#tblsendtransactionWallets > tbody").empty();
+		for (var i = 0; i < wallets.length; i++) {
+			var cobj = wallets[i];
+			var tblRow = '<tr><td><label><input type="radio" name="selectedWallet" value="' + cobj.addr + '">' + cobj.nick + '</label></td><td id="walBalance-' + i + '">loading</td></tr>';
+			$("#tblsendtransactionWallets > tbody").append(tblRow);
+			updateTableRowBalance(cobj.addr, 'walBalance-' + i);
+		}
+	});
+}
+
 function reloadMainPageWallets() {
 	getWalletsArr(function(wallets) {
 		$("#tblwalletsmain > tbody").empty();
@@ -282,34 +302,34 @@ function updateTableRowBalance(address, rawid) {
 	});
 }
 
-function setWalletBalance() {
-	getBalance($("#accountAddress").html(), function(result) {
+function setWalletBalance(id) {
+	getBalance($("#accountAddress" + id).html(), function(result) {
 		if (!result.error) {
 			var bestCurAmount = getBestEtherKnownUnit(result.data.balance);
-			$("#accountBalance").html(bestCurAmount.amount + " " + bestCurAmount.unit);
+			$("#accountBalance" + id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
 			getETHvalue('USD', function(value) {
 				usdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceUsd").html(usdval + " USD");
+				$("#accountBalanceUsd" + id).html(usdval + " USD");
 			});
 			getETHvalue('EUR', function(value) {
 				eurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceEur").html(eurval + " EUR");
+				$("#accountBalanceEur" + id).html(eurval + " EUR");
 			});
 		} else
 		alert(result.msg);
 	});
 }
 
-function walletDecryptSuccess() {
-	$("#accountAddress").html(formatAddress(strPrivateKeyToAddress(PrivKey), 'hex'));
-	setWalletBalance();
-	$("#decryptStatus").html('<p class="text-center text-success"><strong> Wallet successfully decrypted</strong></p>').fadeIn(2000);
-	$("#addDecryptedWalletDiv").show();
+function walletDecryptSuccess(id) {
+	$("#accountAddress" + id).html(formatAddress(strPrivateKeyToAddress(PrivKey), 'hex'));
+	setWalletBalance(id);
+	$("#decryptStatus" + id).html('<p class="text-center text-success"><strong> Wallet successfully decrypted</strong></p>').fadeIn(2000);
+	$("#walletpreview" + id).show();
 }
 
-function walletDecryptFailed(err) {
-	$("#decryptStatus").html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
-	$("#addDecryptedWalletDiv").hide();
+function walletDecryptFailed(id, err) {
+	$("#decryptStatus" + id).html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
+	$("#walletpreview" + id).hide();
 }
 
 function addDecryptedWallet() {
@@ -347,19 +367,42 @@ function decryptFormData() {
 		fr.onload = function() {
 			try {
 				PrivKey = getWalletFilePrivKey(fr.result, $('#walletfilepassword').val());
-				walletDecryptSuccess();
+				walletDecryptSuccess(0);
 			} catch (err) {
-				walletDecryptFailed(err);
+				walletDecryptFailed(0, err);
 			}
 		};
 		fr.readAsText(file);
 	} else if (decryptType == 'privkey') {
 		try {
 			PrivKey = decryptTxtPrivKey($('#manualprivkey').val(), $("#privkeypassword").val());
-			walletDecryptSuccess();
+			walletDecryptSuccess(0);
 		} catch (err) {
-			walletDecryptFailed("Invalid password");
+			walletDecryptFailed(0, "Invalid password");
 		}
+	}
+}
+
+function decryptSendTxData() {
+	var addr = $('input[type=radio][name=selectedWallet]:checked').val();
+	var pin = $('#sendTransactionPin').val();
+	if (addr == "") {
+		$("#decryptStatus1").html(getErrorText("Please select a wallet")).fadeIn(50).fadeOut(3000);
+	} else if (pin == "") {
+		$("#decryptStatus1").html(getErrorText("Please enter the pin of the wallet")).fadeIn(50).fadeOut(3000);
+	} else {
+		getWalletFromStorage(addr, function(data) {
+			try {
+				if (!chrome.runtime.lastError) {
+					PrivKey = decryptTxtPrivKey(JSON.parse(data[addr]).priv, pin);
+					walletDecryptSuccess(1);
+				} else {
+					throw chrome.runtime.lastError.message;
+				}
+			} catch (err) {
+				walletDecryptFailed(1, "Invalid password " + err);
+			}
+		});
 	}
 }
 

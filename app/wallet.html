@@ -162,7 +162,7 @@
           <h4 id="uploadbtntxt-wallet" style="display: none;"> Decrypt your wallet</h4>
           <h4 id="uploadbtntxt-privkey" style="display: none;"> Decrypt your private key </h4>
           <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">DECRYPT</a></div>
-          <div id="decryptStatus"></div>
+          <div id="decryptStatus0"></div>
         </div>
         <div class="col-md-4 col-sm-6" style="display: none;" id="newWalletGenButtonDiv">
           <h4> Generate new Wallet</h4>
@@ -170,18 +170,18 @@
           <div id="generatedWallet"></div>
         </div>
       </section>
-      <section class="row" id="addDecryptedWalletDiv" style="display: none;">
+      <section class="row" id="walletpreview0" style="display: none;">
         <hr />
         <div class="col-sm-4">
           <h4> Account Information </h4>
           <div>
-            <p> Account Address: <br /> <strong id="accountAddress" style="margin-left: 1em"></strong></p>
+            <p> Account Address: <br /> <strong id="accountAddress0" style="margin-left: 1em"></strong></p>
             <p> Account Balance: <br />
-              <strong class="text-success" id="accountBalance" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalance0" style="margin-left: 1em"> loading... </strong>
               <br />
-              <strong class="text-success" id="accountBalanceUsd" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalanceUsd0" style="margin-left: 1em"> loading... </strong>
               <br />
-              <strong class="text-success" id="accountBalanceEur" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalanceEur0" style="margin-left: 1em"> loading... </strong>
             </p>
           </div>
         </div>
@@ -210,50 +210,36 @@
       <section id="walletselection" class="row">
         <div class="col-md-4 col-sm-6">
           <h4> Select a Wallet: </h4>
-          <table width="100%" class="table table-striped table-condensed">
+          <table width="100%" class="table table-striped table-condensed" id="tblsendtransactionWallets">
             <tbody>
-              <tr>
-                <td>
-                  <label><input type="radio" name="selectedWallet" value="taylors-wallet">
-                  Taylor's Wallet</label>
-                </td>
-                <td> 1 ETH </td>
-              </tr>
-              <tr>
-                <td>
-                  <label><input type="radio" name="selectedWallet" value="taylors-2nd-wallet">
-                  Taylor's 2nd Wallet</label>
-                </td>
-                <td> 2 ETH </td>
-              </tr>
             </tbody>
           </table>
         </div>
         <div class="col-md-4 col-sm-6">
           <h4> Enter PIN for this Wallet: </h4>
-          <input class="form-control" type="text" placeholder="PIN">
+          <input class="form-control" type="password" placeholder="PIN" id="sendTransactionPin">
         </div>
         <div class="col-md-4 col-sm-6" id="walletuploadbutton">
           <h4 id="uploadbtntxt-wallet"> Decrypt Wallet:</h4>
-          <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">DECRYPT</a></div>
-          <div id="decryptStatus"></div>
+          <div class="form-group"><a class="btn btn-primary btn-block" id="decryptSendTx">DECRYPT</a></div>
+          <div id="decryptStatus1"></div>
         </div>
 
 
         </div>
       </section>
-      <section class="row" id="wallettransactions" style="display: none;">
+      <section class="row" id="walletpreview1" style="display: none;">
         <hr />
         <div class="col-sm-4">
           <h4> Account Information </h4>
           <div>
-            <p> Account Address: <br /> <strong id="accountAddress" style="margin-left: 1em"></strong></p>
+            <p> Account Address: <br /> <strong id="accountAddress1" style="margin-left: 1em"></strong></p>
             <p> Account Balance: <br />
-              <strong class="text-success" id="accountBalance" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalance1" style="margin-left: 1em"> loading... </strong>
               <br />
-              <strong class="text-success" id="accountBalanceUsd" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalanceUsd1" style="margin-left: 1em"> loading... </strong>
               <br />
-              <strong class="text-success" id="accountBalanceEur" style="margin-left: 1em"> loading... </strong>
+              <strong class="text-success" id="accountBalanceEur1" style="margin-left: 1em"> loading... </strong>
             </p>
           </div>
           <br />
