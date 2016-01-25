@@ -5513,8 +5513,11 @@ header img {
 #paneHelp h3 {
   margin-top: 2em;
 }
+.pad-top {
+  padding-top: 8px;
+}
 #etherWalletPopUp {
-  padding: 20px 8px;
+  padding: 25px 8px 0;
   width: 325px;
   position: relative;
 }
