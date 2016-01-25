@@ -41,7 +41,7 @@ QuickSend works like this:
 You can also use the traditional browser 'Send Transaction' interface found on MyEtherWallet.com, but instead of uploading / pasting you key, you simply select your wallet.
 
 ### Development
-As noted above, this extension is currently under heavy development and we hope to launch early February. We welcome ideas, feedback, and comments. The easiest place to do this is via our [reddit annoucement thread]().
+As noted above, this extension is currently under heavy development and we hope to launch early February. We welcome ideas, feedback, and comments. The easiest place to do this is via our [reddit annoucement thread](https://www.reddit.com/r/ethereum/comments/42ka13/coming_soon_myetherwallet_chrome_extension/).
 
 ### Contact
 [View all the ways you can reach us here.](https://www.myetherwallet.com/#contact).
