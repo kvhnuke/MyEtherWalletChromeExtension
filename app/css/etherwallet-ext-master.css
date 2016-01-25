@@ -5517,7 +5517,7 @@ header img {
   padding-top: 8px;
 }
 #etherWalletPopUp {
-  padding: 25px 8px 0;
+  padding: 25px 8px 10px;
   width: 325px;
   position: relative;
 }
