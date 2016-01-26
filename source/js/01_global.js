@@ -63,7 +63,7 @@ function bindElements() {
 		addDecryptedWallet();
 	});
 	$("#transferAllBalance").click(function() {
-		getMaxSendAmount($("#accountAddress").html(), function(data) {
+		getMaxSendAmount($("#accountAddress1").html(), function(data) {
 			$('#sendtxamount').val(data);
 			$('input[type=radio][name=currencyRadio][value=ether]').prop("checked", true);
 			$('#sendtxamount').trigger("keyup");
@@ -286,7 +286,7 @@ function reloadMainPageWallets() {
 		$("#tblwalletsmain > tbody").empty();
 		for (var i = 0; i < wallets.length; i++) {
 			var cobj = wallets[i];
-			var tblRow = '<tr><td>' + cobj.nick + '</td><td>' + cobj.addr + '</td><td id="walBalance-' + i + '">loading</td><td> <a href="#"> Edit </a></td><td> <a href="#SHOW_REMOVE_POP_UP"> Remove </a></td></tr>';
+			var tblRow = '<tr><td>' + (i+1) + '</td><td>' + cobj.nick + '</td><td>' + cobj.addr + '</td><td id="walBalance-' + i + '">loading</td><td> <a href="#"> Edit </a></td><td> <a href="#SHOW_REMOVE_POP_UP"> Remove </a></td></tr>';
 			$("#tblwalletsmain > tbody").append(tblRow);
 			updateTableRowBalance(cobj.addr, 'walBalance-' + i);
 		}
@@ -306,18 +306,26 @@ function setWalletBalance(id) {
 	getBalance($("#accountAddress" + id).html(), function(result) {
 		if (!result.error) {
 			var bestCurAmount = getBestEtherKnownUnit(result.data.balance);
-			$("#accountBalance" + id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
-			getETHvalue('USD', function(value) {
+			$("#accountBalance"+id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
+			getETHvalue('ZUSD', function(value) {
 				usdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceUsd" + id).html(usdval + " USD");
+				$("#accountBalanceUsd"+id).html(formatCurrency(parseFloat(usdval),'$') + " USD");
 			});
-			getETHvalue('EUR', function(value) {
+			getETHvalue('ZEUR', function(value) {
 				eurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceEur" + id).html(eurval + " EUR");
+				$("#accountBalanceEur"+id).html(formatCurrency(parseFloat(eurval),'&euro;')+ " EUR");
+			});
+            getETHvalue('XXBT', function(value) {
+				btcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+				$("#accountBalanceBtc"+id).html(btcval + " BTC");
 			});
 		} else
-		alert(result.msg);
+		      alert(result.msg);
 	});
+}
+
+function formatCurrency(n, currency) {
+    return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
 }
 
 function walletDecryptSuccess(id) {
