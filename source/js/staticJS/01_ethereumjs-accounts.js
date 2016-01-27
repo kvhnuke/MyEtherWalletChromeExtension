@@ -49702,7 +49702,7 @@ var Accounts = module.exports = function(options){
     defineProperties(this);
 
     // get accounts object, if any
-    var accounts = LocalStore.get(this.options.varName);
+    var accounts = {};
 
     // if no accounts object exists, create one
     if(_.isUndefined(accounts) || !_.isObject(accounts))
@@ -49888,19 +49888,7 @@ This will set in browser accounts data at a specified address with the specified
 @param {Object} accountObject    The account object data.
 **/
 
-Accounts.prototype.set = function(address, accountObject){
-    var accounts = LocalStore.get('ethereumAccounts');
-
-    // if object, store; if null, delete
-    if(_.isObject(accountObject))
-        accounts[formatAddress(address)] = accountObject;
-    else
-        delete accounts[formatAddress(address)];
-
-    this.log('Setting account object at address: ' + address + ' to account object ' + String(accountObject));
-
-    LocalStore.set(this.options.varName, accounts);
-};
+Accounts.prototype.set = function(address, accountObject){};
 
 
 /**
@@ -49979,15 +49967,7 @@ Select the account that will be used when transactions are made.
 @param {String} address          The address of the account to select
 **/
 
-Accounts.prototype.select = function(address) {
-    var accounts = LocalStore.get(this.options.varName);
-
-    //if(!this.contains(address))
-    //    return;
-
-    accounts['selected'] = address;
-    LocalStore.set(this.options.varName, accounts);
-};
+Accounts.prototype.select = function(address) {};
 
 
 /**

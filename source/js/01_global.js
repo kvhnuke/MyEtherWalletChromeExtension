@@ -286,10 +286,11 @@ function reloadMainPageWallets() {
 		$("#tblwalletsmain > tbody").empty();
 		for (var i = 0; i < wallets.length; i++) {
 			var cobj = wallets[i];
-			var tblRow = '<tr><td>' + (i+1) + '</td><td>' + cobj.nick + '</td><td>' + cobj.addr + '</td><td id="walBalance-' + i + '">loading</td><td> <a href="#"> Edit </a></td><td> <a href="#SHOW_REMOVE_POP_UP"> Remove </a></td></tr>';
+            var tblRow = getMainPageWalletRow(i+1,cobj.nick,cobj.addr);
 			$("#tblwalletsmain > tbody").append(tblRow);
-			updateTableRowBalance(cobj.addr, 'walBalance-' + i);
+            setWalletBalance('MainTbl-'+(i+1));
 		}
+        addEditEvents();
 	});
 }
 
@@ -301,21 +302,28 @@ function updateTableRowBalance(address, rawid) {
 		}
 	});
 }
-
+function addEditEvents(){
+    $(".mainWalletEdit").unbind().click(function(){
+        var editval = $(this).attr('editval');
+        var nickname = $("#accountNickMainTbl-"+editval).html();
+        $("#walletNicknameEdit").html(nickname);
+        $("#editWallet").modal("show");
+    });
+}
 function setWalletBalance(id) {
 	getBalance($("#accountAddress" + id).html(), function(result) {
 		if (!result.error) {
 			var bestCurAmount = getBestEtherKnownUnit(result.data.balance);
 			$("#accountBalance"+id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
-			getETHvalue('ZUSD', function(value) {
+			getETHvalue('USD', function(value) {
 				usdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
 				$("#accountBalanceUsd"+id).html(formatCurrency(parseFloat(usdval),'$') + " USD");
 			});
-			getETHvalue('ZEUR', function(value) {
+			getETHvalue('EUR', function(value) {
 				eurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
 				$("#accountBalanceEur"+id).html(formatCurrency(parseFloat(eurval),'&euro;')+ " EUR");
 			});
-            getETHvalue('XXBT', function(value) {
+            getETHvalue('BTC', function(value) {
 				btcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
 				$("#accountBalanceBtc"+id).html(btcval + " BTC");
 			});
