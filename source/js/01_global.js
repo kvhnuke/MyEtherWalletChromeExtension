@@ -6,8 +6,13 @@ var eurval;
 $(document).ready(function() {
 	bindElements();
 	checkAndLoadPageHash();
+    pageBasedOnLoads();
 });
-
+function pageBasedOnLoads(){
+    if($("#popupMainAccountTbl").length)
+        reloadPopupAccounts();
+        
+}
 function checkAndLoadPageHash() {
 	if (window.location.hash) {
 		var phash = window.location.hash.substr(1);

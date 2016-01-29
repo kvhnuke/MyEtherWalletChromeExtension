@@ -13,3 +13,23 @@ function getMainPageWalletRow(rid, nick,address){
             </tr>";
     return str;
 }
+function getAccountInfoRow(rid,address, nick){
+    var str = "<tr>\
+        <td>\
+        <div style='display:none;' id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
+          <label>"+nick+"</label>\
+        </td>\
+        <td id='accountBalancePopMB-"+rid+"'></td>\
+      </tr>";
+    return str;
+}
+function getQuickSendRow(rid,address, nick){
+    var str = "<tr>\
+        <td>\
+        <div style='display:none;' id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
+          <label><label><input type=\"radio\" name=\"selectedWallet\" value=\"taylors-wallet\">"+nick+"</label>\
+        </td>\
+        <td id='accountBalancePopMB-"+rid+"'></td>\
+      </tr>";
+    return str;
+}
