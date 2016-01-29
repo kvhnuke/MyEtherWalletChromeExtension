@@ -13,6 +13,7 @@ function getAllNickNames(callback){
     });
 }
 function addWalletToStorage(address, encprivkey, nickname, callback){
+    nickname = nickname.replace(/(<([^>]+)>)/ig,"");
     var value = {nick:nickname, priv:encprivkey, type:'wallet'};
     var keyname = address;
     var obj= {};
@@ -34,6 +35,29 @@ function getWalletsArr(callback){
                  }
             }
         }
+        wallets.sort(sortByNickName);
         callback(wallets);
     });
+}
+function deleteAccount(address,callback){
+    storage.remove(address,function(){
+        callback(address);
+    });
+}
+function editNickName(address,newNick, callback){
+    newNick = newNick.replace(/(<([^>]+)>)/ig,"");
+    storage.get(address, function(account) {
+        var accountInfo = account[address];
+        accountInfo = JSON.parse(accountInfo);
+        accountInfo['nick'] = newNick;
+        account[address] = JSON.stringify(accountInfo);
+        storage.set(account,function(){
+            callback(newNick);
+        });
+    });
+}
+function sortByNickName(a, b){
+    if(a.nick < b.nick) return -1;
+    if(a.nick > b.nick) return 1;
+    return 0;
 }

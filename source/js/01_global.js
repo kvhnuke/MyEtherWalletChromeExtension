@@ -62,6 +62,22 @@ function bindElements() {
 	$("#decryptAddWallet").click(function() {
 		addDecryptedWallet();
 	});
+    $("#btnapproveEdit").click(function(){
+        var ethAccAddress = $("#editWalletAddress").val();
+        var newNick = $("#walletName").val();
+        editNickName(ethAccAddress,newNick,function(){
+            reloadMainPageWallets();
+            $("#walletName").val('');
+            $("#editWallet").modal("hide");
+        });
+    });
+    $("#btnapproveremove").click(function(){
+        var ethAccAddress = $("#deleteWalletAddress").val();
+        deleteAccount(ethAccAddress,function(){
+            reloadMainPageWallets();
+            $("#removeWallet").modal("hide");
+        });
+    });
 	$("#transferAllBalance").click(function() {
 		getMaxSendAmount($("#accountAddress1").html(), function(data) {
 			$('#sendtxamount').val(data);
@@ -306,8 +322,18 @@ function addEditEvents(){
     $(".mainWalletEdit").unbind().click(function(){
         var editval = $(this).attr('editval');
         var nickname = $("#accountNickMainTbl-"+editval).html();
+        var walAddress = $("#accountAddressMainTbl-"+editval).html();
         $("#walletNicknameEdit").html(nickname);
+        $('#editWalletAddress').val(walAddress);
         $("#editWallet").modal("show");
+    });
+    $(".mainWalletDelete").unbind().click(function(){
+        var deleteVal = $(this).attr('deleteVal');
+        var nickname = $("#accountNickMainTbl-"+deleteVal).html();
+        var walAddress = $("#accountAddressMainTbl-"+deleteVal).html();
+        $("#walletNicknameDelete").html(nickname);
+        $('#deleteWalletAddress').val(walAddress);
+        $("#removeWallet").modal("show");
     });
 }
 function setWalletBalance(id) {
