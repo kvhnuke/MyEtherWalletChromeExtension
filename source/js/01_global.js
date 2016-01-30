@@ -3,16 +3,11 @@ var decryptType = "";
 var SavedNickNames = [];
 var usdval;
 var eurval;
+var btcval;
 $(document).ready(function() {
 	bindElements();
 	checkAndLoadPageHash();
-    pageBasedOnLoads();
 });
-function pageBasedOnLoads(){
-    if($("#popupMainAccountTbl").length)
-        reloadPopupAccounts();
-        
-}
 function checkAndLoadPageHash() {
 	if (window.location.hash) {
 		var phash = window.location.hash.substr(1);
@@ -347,16 +342,19 @@ function setWalletBalance(id) {
 			var bestCurAmount = getBestEtherKnownUnit(result.data.balance);
 			$("#accountBalance"+id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
 			getETHvalue('USD', function(value) {
-				usdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceUsd"+id).html(formatCurrency(parseFloat(usdval),'$') + " USD");
+                usdval = value;
+				tusdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+				$("#accountBalanceUsd"+id).html(formatCurrency(parseFloat(tusdval),'$') + " USD");
 			});
 			getETHvalue('EUR', function(value) {
-				eurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceEur"+id).html(formatCurrency(parseFloat(eurval),'&euro;')+ " EUR");
+                eurval = value;
+				teurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+				$("#accountBalanceEur"+id).html(formatCurrency(parseFloat(teurval),'&euro;')+ " EUR");
 			});
             getETHvalue('BTC', function(value) {
-				btcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
-				$("#accountBalanceBtc"+id).html(btcval + " BTC");
+                btcval = value;
+				tbtcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+				$("#accountBalanceBtc"+id).html(tbtcval + " BTC");
 			});
 		} else
 		      alert(result.msg);

@@ -27,7 +27,7 @@ function getQuickSendRow(rid,address, nick){
     var str = "<tr>\
         <td>\
         <div style='display:none;' id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
-          <label><label><input type=\"radio\" name=\"selectedWallet\" value=\"taylors-wallet\">"+nick+"</label>\
+          <label><label><input type=\"radio\" name=\"selectedWallet\" value=\""+address+"\">"+nick+"</label>\
         </td>\
         <td id='accountBalancePopMB-"+rid+"'></td>\
       </tr>";
