@@ -475,13 +475,13 @@ function generateSingleWallet() {
 	var password = $("#ethgenpassword").val();
 	var nickname = stripScriptTags($("#newWalletNick").val());
 	if (password == "") {
-		$("#generatedWallet").html(getErrorText("You must enter a PIN")).fadeIn(50).fadeOut(3000);
+		$("#generatedWallet").html(getErrorText("You must enter a PIN.")).fadeIn(50).fadeOut(3000);
 	} else if (password.length < 8) {
-		$("#generatedWallet").html(getErrorText("Your password must be at least 8 characters")).fadeIn(50).fadeOut(3000);
+		$("#generatedWallet").html(getErrorText("Your password must be at least 8 characters.")).fadeIn(50).fadeOut(3000);
 	} else if (nickname == "") {
-		$("#generatedWallet").html(getErrorText("You must enter a nickname for your wallet")).fadeIn(50).fadeOut(3000);
+		$("#generatedWallet").html(getErrorText("You must enter a nickname for your wallet.")).fadeIn(50).fadeOut(3000);
 	} else if ($.inArray(nickname, SavedNickNames) > -1) {
-		$("#generatedWallet").html(getErrorText("Nickname is in use, please select different nickname")).fadeIn(50).fadeOut(3000);
+		$("#generatedWallet").html(getErrorText("Nickname is already in use. Please use different nickname.")).fadeIn(50).fadeOut(3000);
 	} else {
 		var acc = new Accounts();
 		var newAccount = acc.new();

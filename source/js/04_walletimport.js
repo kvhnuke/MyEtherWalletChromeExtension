@@ -53,7 +53,7 @@ function decryptTxtPrivKey(strkey, password) {
 		var addressHash = strkey.substr(strkey.length - 4);
 		var address = formatAddress(strPrivateKeyToAddress(privkey), 'hex');
 		var generatedHash = cryptoJSToHex(CryptoJS.SHA3(address));
-		if (generatedHash.substr(generatedHash.length - 4) != addressHash) throw "Invalid Password";
+		if (generatedHash.substr(generatedHash.length - 4) != addressHash) throw "Invalid Password. Please try again.";
 	} else if (strkey.length == 64) {
 		var privkey = strkey;
 	} else {
@@ -86,7 +86,7 @@ function decryptEthWalletJson(ethjson, password) {
 	}
 	if (verifyPrivKey(privkey, formatAddress(ethjson.address, 'raw'))) return privkey;
 	else
-	throw "Invalid Password";
+	throw "Invalid Password. Please try again.";
 }
 
 function walletRequirePass(ethjson) {
@@ -101,7 +101,7 @@ function walletRequirePass(ethjson) {
 	else if (jsonArr.hash != null && jsonArr.locked) return true;
 	else if (jsonArr.hash != null && !jsonArr.locked) return false;
 	else
-	throw "Sorry! we dont have a clue what kind of wallet file this is.";
+	throw "Sorry! We don't recognize that type of wallet file. Please try again.";
 }
 
 function verifyPrivKey(privkey, address) {
@@ -117,7 +117,7 @@ function getWalletFilePrivKey(strjson, password) {
 	else if (jsonArr.Crypto != null || jsonArr.crypto != null) return decryptGethKeyV3(strjson, password);
 	else if (jsonArr.hash != null) return decryptEthWalletJson(strjson, password);
 	else
-	throw "Sorry! we dont have any clue what kind of wallet file this is.";
+	throw "Sorry! We don't recognize that type of wallet file. Please try again.";
 }
 
 function formatAddress(addr, format) {

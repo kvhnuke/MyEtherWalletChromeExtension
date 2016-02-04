@@ -2,22 +2,22 @@ var stdTransactionGas = 21000;
 
 function createTransaction(privkey, to, amountinwei, successcb, errorcb) {
 	if (privkey.length != 64) {
-		errorcb("Invalid Private key, try again");
+		errorcb("Invalid Private Key. Please try again.");
 		return;
 	}
 	if (!validateEtherAddress(to)) {
-		errorcb("Invalid to Address, try again");
+		errorcb("Invalid to Address. Please try again.");
 		return;
 	}
 	if (!$.isNumeric(amountinwei) || amountinwei <= 0) {
-		errorcb("Invalid amount, try again");
+		errorcb("Invalid Amount. Please try again.");
 		return;
 	}
 	var privateKey = new Buffer(privkey, 'hex');
 	var address = strPrivateKeyToAddress(privkey);
 	getTransactionData(address, function(data) {
 		if (data.error) {
-			errorcb("Error occurred: " + data.msg);
+			errorcb("Whoops. There was an error: " + data.msg);
 			return;
 		}
 		data = data.data;
@@ -37,7 +37,7 @@ function createTransaction(privkey, to, amountinwei, successcb, errorcb) {
 		tx.sign(privateKey);
 		verifyUpFrontCost(rawTx, function(estimatedCost) {
 			if (estimatedCost > data.balance) {
-				errorcb("You dont have enough balance in your account to process is transaction");
+				errorcb("Whoops. You don't have enough balance in your account to process this transaction");
 				return
 			}
 			var serializedTx = '0x' + tx.serialize().toString('hex');
@@ -52,28 +52,28 @@ function createTransaction(privkey, to, amountinwei, successcb, errorcb) {
 
 function createTransactionFromRaw(rawObj, privkey, successcb, errorcb) {
 	if (privkey.length != 64) {
-		errorcb("Invalid Private key, try again");
+		errorcb("Invalid Private Key. Please try again.");
 		return;
 	}
 	if (!validateEtherAddress(rawObj.from) || !validateEtherAddress(rawObj.to)) {
-		errorcb("Invalid Address, try again");
+		errorcb("Invalid Address. Please try again.");
 		return;
 	}
 	if (!$.isNumeric(rawObj.value) || rawObj.value <= 0) {
-		errorcb("Invalid amount, try again");
+		errorcb("Invalid amount. Please try again.");
 		return;
 	}
 	var privateKey = new Buffer(privkey, 'hex');
 	var address = strPrivateKeyToAddress(privkey);
 	getTransactionData(address, function(data) {
 		if (data.error) {
-			errorcb("Error occurred: " + data.msg);
+			errorcb("Whoops. There was an error: " + data.msg);
 			return;
 		}
 		data = data.data;
 		var nonce = padLeftEven(BNtoHex(new BigNumber(data.nonce)));
 		var gasPrice = padLeftEven(BNtoHex(new BigNumber(data.gasprice).plus(1000000000).toDigits(1)));
-		var gasLimit = padLeftEven(BNtoHex(new BigNumber(rawObj.gas))); 
+		var gasLimit = padLeftEven(BNtoHex(new BigNumber(rawObj.gas)));
 		var value = padLeftEven(BNtoHex(new BigNumber(String(rawObj.value))));
 		var rawTx = {
 			nonce: '0x'+nonce,
@@ -87,7 +87,7 @@ function createTransactionFromRaw(rawObj, privkey, successcb, errorcb) {
 		tx.sign(privateKey);
 		verifyUpFrontCost(rawTx, function(estimatedCost) {
 			if (estimatedCost > data.balance) {
-				errorcb("You dont have enough balance in your account to process is transaction");
+				errorcb("There is not enough balance in your account to process is transaction.");
 				return
 			}
 			var serializedTx = '0x' + tx.serialize().toString('hex');
@@ -103,7 +103,7 @@ function createTransactionFromRaw(rawObj, privkey, successcb, errorcb) {
 function verifyUpFrontCost(rawTx, successcb, errorcb) {
 	getEstimatedGas(rawTx, function(data) {
 		if (data.error) {
-			errorcb("Error occurred: " + data.msg);
+			errorcb("Whoops. There was an error: " + data.msg);
 		} else {
             if(new BigNumber(formatHexString(data.data, 'hex')).greaterThan(new BigNumber(formatHexString(rawTx.gasLimit, 'hex')))){
                 errorcb("Gas limit is too low");
@@ -118,14 +118,14 @@ function verifyUpFrontCost(rawTx, successcb, errorcb) {
 function getMaxSendAmount(address, successcb, errorcb) {
 	getTransactionData(address, function(data) {
 		if (data.error) {
-			errorcb("Error occurred: " + data.msg);
+			errorcb("Whoops. There was an error: " + data.msg);
 			return;
 		}
 		data = data.data;
 		var gasPrice = new BigNumber(data.gasprice).plus(1000000000).toDigits(1).times(stdTransactionGas);
 		var maxVal = new BigNumber(String(data.balance)).minus(gasPrice);
 		if (maxVal.lessThan(0)) {
-			errorcb("Not enough balance to send a transaction");
+			errorcb("There is not enough balance in your account to process is transaction.");
 		} else {
 			successcb(toEther(maxVal.toString(), 'wei'));
 		}
@@ -135,7 +135,7 @@ function getMaxSendAmount(address, successcb, errorcb) {
 function sendTransaction(signedRawTx, successcb, errorcb) {
 	sendRawTx(signedRawTx, function(data) {
 		if (data.error) {
-			errorcb("Error occurred: " + data.msg);
+			errorcb("Whoops. There was an error: " + data.msg);
 			return;
 		}
 		successcb(data.data);
@@ -188,7 +188,7 @@ function getValueOfUnit(unit) {
 	unit = unit ? unit.toLowerCase() : 'ether';
 	var unitValue = unitMap[unit];
 	if (unitValue === undefined) {
-		throw new Error('This unit doesn\'t exists, please use the one of the following units' + JSON.stringify(unitMap, null, 2));
+		throw new Error('This unit doesn\'t exist. Please use the one of the following units' + JSON.stringify(unitMap, null, 2));
 	}
 	return new BigNumber(unitValue, 10);
 }

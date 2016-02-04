@@ -16,9 +16,9 @@ function bindPopElements() {
 			var selectedAcc = $("input[name=selectedWallet]:checked").val();
 			var toAddress = $('#sendtxaddress').val();
 			var sendAmount = $('#sendtxamount').val();
-			if (typeof selectedAcc == 'undefined') throw "No account selected";
-			if (!validateEtherAddress(toAddress)) throw "Invalid to Address, try again";
-			if (!$.isNumeric(sendAmount) || sendAmount <= 0) throw "Invalid amount, try again";
+			if (typeof selectedAcc == 'undefined') throw "Whoops. An account was not selected.";
+			if (!validateEtherAddress(toAddress)) throw "Invalid To: Address. Please check the address and try again.";
+			if (!$.isNumeric(sendAmount) || sendAmount <= 0) throw "Invalid Amount. Please try again.";
 			var etherUnit = $('input[type=radio][name=currencyRadio]:checked').val();
 			var weiAmount = toWei(sendAmount, etherUnit);
 			$("#confirmAmount").html(sendAmount);
@@ -58,9 +58,9 @@ function decryptAndSendTx() {
 	var addr = $('input[type=radio][name=selectedWallet]:checked').val();
 	var pin = $('#sendTransactionPin').val();
 	if (addr == "") {
-		$("#decryptStatus1").html(getErrorText("Please select a wallet")).fadeIn(50).fadeOut(3000);
+		$("#decryptStatus1").html(getErrorText("Please select a wallet.")).fadeIn(50).fadeOut(3000);
 	} else if (pin == "") {
-		$("#decryptStatus1").html(getErrorText("Please enter the pin of the wallet")).fadeIn(50).fadeOut(3000);
+		$("#decryptStatus1").html(getErrorText("Please enter the pin of the wallet.")).fadeIn(50).fadeOut(3000);
 	} else {
 		getWalletFromStorage(addr, function(data) {
 			try {
@@ -73,9 +73,9 @@ function decryptAndSendTx() {
 					createTransaction(PrivKey, toAddress, weiAmount, function(data) {
 						var signedtx = data.signed;
 						sendTransaction(signedtx, function(data) {
-							$("#decryptStatus1").html('<p class="text-center text-success"><strong> Transaction submitted. TX ID: ' + data + '</strong></p>').fadeIn(50).fadeOut(3000,function() {
+							$("#decryptStatus1").html('<p class="text-center text-success"><strong> Success! Transaction submitted. TX ID: ' + data + '</strong></p>').fadeIn(50).fadeOut(3000,function() {
 								location.reload();
-							});							
+							});
 						}, function(err) {
 							$("#decryptStatus1").html('<p class="text-center text-danger"><strong>' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
 						});
@@ -86,7 +86,7 @@ function decryptAndSendTx() {
 					throw chrome.runtime.lastError.message;
 				}
 			} catch (err) {
-				walletDecryptFailed(1, "Invalid password " + err);
+				walletDecryptFailed(1, "Invalid Password " + err);
 			}
 		});
 	}
