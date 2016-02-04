@@ -53,6 +53,7 @@
               <th>Wallet Address</th>
               <th>Balance</th>
               <th>Edit</th>
+              <th>View</th>
               <th>Remove</th>
             </tr>
           </thead>
@@ -67,6 +68,7 @@
                 <small>135.0300 BTC &nbsp;&nbsp; $12,135.49 USD &nbsp;&nbsp; €19,990.00 EUR </small>
               </td>
               <td> <a data-toggle="modal" data-target="#editWallet" > Edit </a></td>
+              <td> <a data-toggle="modal" data-target="#viewWalletDetails" class="text-warning"> View Wallet Details </a></td>
               <td> <a data-toggle="modal" data-target="#removeWallet" class="text-danger"> Remove </a></td>
             </tr>
             <tr>
@@ -79,33 +81,11 @@
                 <small>135.0300 BTC &nbsp;&nbsp; $12,135.49 USD &nbsp;&nbsp; €19,990.00 EUR </small>
               </td>
               <td> <a data-toggle="modal" data-target="#editWallet" > Edit </a></td>
+              <td> <a data-toggle="modal" data-target="#viewWalletDetails" class="text-warning"> View Wallet Details </a></td>
               <td> <a data-toggle="modal" data-target="#removeWallet" class="text-danger"> Remove </a></td>
             </tr>
           </tbody>
         </table>
-
-        <!-- Remove Modal -->
-        <div class="modal fade" id="removeWallet" tabindex="-1" role="dialog" aria-labelledby="removeWalletLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="myModalLabel"> <strong class="text-danger">Warning!</strong></h3>
-              </div>
-              <div class="modal-body">
-                <h4>You are about to remove your wallet "<span id="walletNicknameDelete"></span>".</h4>
-                <input type="hidden" value="" id="deleteWalletAddress"/>
-                <p> If you want to use this wallet with your MyEtherWallet Chrome Extension in the future, you will need to re-add it.</p>
-                <h4>Are you <span class="text-underline"> sure </span> you want to do this?</h4>
-              </div>
-              <div class="modal-footer text-center">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No, get me out of here!</button>
-                <button type="button" class="btn btn-danger" id="btnapproveremove">Yes, I am sure! Remove the sucker.</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--/Remove modal-->
 
         <!-- Edit Modal -->
         <div class="modal fade" id="editWallet" tabindex="-1" role="dialog" aria-labelledby="editWalletLabel">
@@ -113,7 +93,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="myModalLabel"> Editing Wallet: <span id="walletNicknameEdit"></span></h3>
+                <h3 class="modal-title" id="myModalLabel"> Edit Wallet: <span id="walletNicknameEdit"></span></h3>
               </div>
               <div class="modal-body">
                 <form role="form">
@@ -132,6 +112,127 @@
           </div>
         </div>
         <!--/edit modal-->
+
+
+        <!-- View Private Key Modal -->
+        <div class="modal fade" id="viewWalletDetails" tabindex="-1" role="dialog" aria-labelledby="viewKeyLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel"> View Wallet Details: <span id="walletNicknameEdit"> nickname of wallet </span></h3>
+              </div>
+              <div class="modal-body">
+                <p> Viewing the wallet details allows you to view the wallet's private key, save the wallet's JSON file, and print the paper wallet.</p>
+                <form role="form">
+                  <div class="form-group">
+                    <label for="walletName">Enter Your PIN:</label>
+                    <input type="text" class="form-control" id="" value="">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-warning" id=""> View Wallet Details </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/View Private Key Modal-->
+
+
+        <!-- Remove Modal -->
+        <div class="modal fade" id="removeWallet" tabindex="-1" role="dialog" aria-labelledby="removeWalletLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel">Remove Wallet: <span id="walletNicknameDelete"></span></h3>
+              </div>
+              <div class="modal-body">
+                <h4>Warning! You are about to remove your wallet "<span id="walletNicknameDelete"></span>".</h4>
+                <input type="hidden" value="" id="deleteWalletAddress"/>
+                <p> Be sure you have <strong>saved the private key/JSON file and the password</strong> associated with this wallet before you remove it.</p>
+                <p> If you want to use this wallet with your MyEtherWallet CX in the future, you will need to manually re-add it using the private key/JSON and password.</p>
+                <p> Remember, the PIN is <strong> not </strong> the password. PINs are used to unlock your wallet on MyEtherWallet CX only. Passwords are used to decrypt the private key/JSON file.</p>
+
+                <h4>Are you <span class="text-underline"> sure </span> you want to do this?</h4>
+              </div>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No, get me out of here!</button>
+                <button type="button" class="btn btn-danger" id="btnapproveremove">Yes, I am sure! Remove the sucker.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/Remove modal-->
+
+        <!-- View Private Key Details Pane-->
+
+        <div id="viewWalletDiv">
+          <div class="row" id="">
+            <hr />
+            <div class="col-sm-8">
+              <h3><span class="text-light">Viewing Wallet Details For:</span> <span id="walletNickname"> tayvano's wallet </span></h3>
+            </div>
+            <div class="col-sm-4 text-right" style="margin-top: 16px;">
+              <a href="" class="btn btn-warning"> Hide Wallet Details </a>
+              &nbsp;&nbsp;
+              <a href="" class="btn btn-danger"> Remove Wallet </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="form-group col-sm-10">
+                  <h4>Your Address:</h4>
+                  <input class="form-control" type="text" id="address" readonly="readonly">
+                </div>
+                <div class="col-sm-2 address-identicon-container">
+                  <div id="addressIdenticon" title="Address Indenticon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <h4>Your Private Key (encrypted):</h4>
+                <textarea class="form-control bigger-on-mobile" type="text" id="privkeyenc" readonly="readonly"></textarea>
+              </div>
+              <div class="form-group">
+                <h4>Your Private Key (unencrypted):</h4>
+                <textarea class="form-control" type="text" id="privkey" readonly="readonly"></textarea>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <h4>QR code (Address):</h4>
+                  <div id="qrcodeAdd" width="100%"></div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <h4>QR code (Private Key):</h4>
+                  <div id="qrcode" width="100%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <h4> Print Paper Wallet: </h4>
+                <a class="btn btn-info btn-block" id="printqr">PRINT</a>
+              </div>
+              <div class="form-group">
+                <h4>Download JSON file (encrypted): <br /> <small> You will need to use the password you used to generate your wallet to unencrypt this file. </small></h4>
+                <a class="btn btn-info btn-block" id="encdownload"> DOWNLOAD </a>
+              </div>
+              <div class="form-group">
+                <h4>Download JSON file (unencrypted):</h4>
+                <a class="btn btn-info btn-block" id="unencdownload">DOWNLOAD</a>
+              </div>
+              <br />
+              <h4>A note about encrypted vs unencrypted:</h4>
+              <p>MyEtherWallet can decrypt geth / pre-sale wallets, but geth <strong>cannot</strong> decrypt wallets encrypted by MyEtherWallet. If you plan on not touching a wallet created on MyEtherWallet for a long, long time it may be prudent to save the unencrypted private key / .json file so you can access it via geth, the official Ethereum wallet, or whatever else is around in the distant future.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- / end View Private Key Details Pane-->
 
 
       </div>
