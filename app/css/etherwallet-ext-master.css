@@ -5516,6 +5516,9 @@ header img {
 .pad-top {
   padding-top: 8px;
 }
+input[type=radio] {
+  margin: 4px 8px 0 2px;
+}
 #etherWalletPopUp {
   padding: 25px 8px 10px;
   width: 325px;
