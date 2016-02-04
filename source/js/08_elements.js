@@ -10,7 +10,7 @@ function getMainPageWalletRow(rid, nick,address){
               </td>\
               <td> <a editVal='"+rid+"' class='mainWalletEdit'> Edit </a></td>\
               <td> <a viewVal='"+rid+"' class='text-warning mainWalletView'> View Wallet Details </a></td>\
-              <td> <a deleteVal='"+rid+"' class='mainWalletDelete' class=\"text-danger\"> Remove </a></td>\
+              <td> <a deleteVal='"+rid+"' class='mainWalletDelete text-danger'> Remove </a></td>\
             </tr>";
     return str;
 }
