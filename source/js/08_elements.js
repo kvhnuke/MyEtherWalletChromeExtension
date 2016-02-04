@@ -9,6 +9,7 @@ function getMainPageWalletRow(rid, nick,address){
                 <small><span id=\"accountBalanceBtcMainTbl-"+rid+"\"></span> &nbsp;&nbsp; <span id=\"accountBalanceUsdMainTbl-"+rid+"\"></span> &nbsp;&nbsp; <span id=\"accountBalanceEurMainTbl-"+rid+"\"></span></small>\
               </td>\
               <td> <a editVal='"+rid+"' class='mainWalletEdit'> Edit </a></td>\
+              <td> <a viewVal='"+rid+"' class='text-warning mainWalletView'> View Wallet Details </a></td>\
               <td> <a deleteVal='"+rid+"' class='mainWalletDelete' class=\"text-danger\"> Remove </a></td>\
             </tr>";
     return str;

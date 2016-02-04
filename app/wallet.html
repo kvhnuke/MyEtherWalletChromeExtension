@@ -120,20 +120,22 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="myModalLabel"> View Wallet Details: <span id="walletNicknameEdit"> nickname of wallet </span></h3>
+                <h3 class="modal-title" id="myModalLabel"> View Wallet Details: <span id="walletNicknameView"> nickname of wallet </span></h3>
               </div>
               <div class="modal-body">
                 <p> Viewing the wallet details allows you to view the wallet's private key, save the wallet's JSON file, and print the paper wallet.</p>
                 <form role="form">
                   <div class="form-group">
                     <label for="walletName">Enter Your PIN:</label>
-                    <input type="text" class="form-control" id="" value="">
+                    <input type="hidden" value="" id="viewWalletAddress"/>
+                    <input type="password" class="form-control" id="viewWalletPin" value="">
+                    <div id="viewWalletPopStatus"></div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer text-center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-warning" id=""> View Wallet Details </button>
+                <button type="button" class="btn btn-warning" id="btnapproveView"> View Wallet Details </button>
               </div>
             </div>
           </div>
@@ -169,16 +171,14 @@
 
         <!-- View Private Key Details Pane-->
 
-        <div id="viewWalletDiv">
+        <div id="viewWalletDiv" style="display: none;">
           <div class="row" id="">
             <hr />
             <div class="col-sm-8">
               <h3><span class="text-light">Viewing Wallet Details For:</span> <span id="walletNickname"> tayvano's wallet </span></h3>
             </div>
             <div class="col-sm-4 text-right" style="margin-top: 16px;">
-              <a href="" class="btn btn-warning"> Hide Wallet Details </a>
-              &nbsp;&nbsp;
-              <a href="" class="btn btn-danger"> Remove Wallet </a>
+              <a  class="btn btn-warning" id="hideWalletDetails"> Hide Wallet Details </a>
             </div>
           </div>
           <div class="row">

@@ -103,5 +103,8 @@ function reloadPopupAccounts() {
 			$("#popupMainAccountTbl > tbody").append(tblRow);
 			setWalletBalance('PopMB-' + i);
 		}
+        if(wallets.length==0){
+            $("#popupMainAccountTbl > tbody").append("<tr><td colspan=\"2\">You don't have any wallets saved yet! Click the <a class=\"text-primary\" href=\"/wallet.html#add-wallet\" target=\"_blank\">\"Add Wallet\"</a> button to add one!</td></tr>");
+        }
 	});
 }
