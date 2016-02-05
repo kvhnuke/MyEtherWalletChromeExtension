@@ -1,6 +1,7 @@
 var PrivKey = "";
 var decryptType = "";
 var SavedNickNames = [];
+var SavedAccounts = [];
 var usdval;
 var eurval;
 var btcval;
@@ -37,6 +38,7 @@ function paneNavigate(showEleId, activeEleId) {
 function onTabOpen(tabid) {
 	if (tabid == 'add-wallet') {
 		setNickNames();
+        setAccounts();
 	} else if (tabid == 'wallets') {
 		reloadMainPageWallets();
 	} else if (tabid == 'send-transaction') {
@@ -319,7 +321,11 @@ function setNickNames() {
 		SavedNickNames = data;
 	});
 }
-
+function setAccounts(){
+    getAllAccounts(function(data) {
+		SavedAccounts = data;
+	});
+}
 function preSendTransaction() {
 	sendTransaction($("#tasignedtx").val(), function(data) {
 		$("#txsendstatus").html('<p class="text-center text-success"><strong> Transaction submitted. TX ID: ' + data + '</strong></p>');
@@ -490,6 +496,10 @@ function addDecryptedWallet() {
 		$("#generatedWallet").html(getErrorText("Password cannot be same as the the nickname")).fadeIn(50).fadeOut(3000);
 	} else {
 		var address = formatAddress(strPrivateKeyToAddress(PrivKey), 'hex');
+        if ($.inArray(address, SavedAccounts) > -1) {
+		  $("#AddDecryptedWalletStatus").html(getErrorText("Account already exists")).fadeIn(50).fadeOut(3000);
+          return;
+        }
 		var encprivkey = encryptPrivKey(PrivKey, password);
 		addWalletToStorage(address, encprivkey, nickname, function() {
 			if (chrome.runtime.lastError) {
@@ -527,7 +537,12 @@ function decryptFormData() {
 		fr.readAsText(file);
 	} else if (decryptType == 'privkey') {
 		try {
-			PrivKey = decryptTxtPrivKey($('#manualprivkey').val(), $("#privkeypassword").val());
+            var passVal = $('#privkeypassword').val();
+			PrivKey = decryptTxtPrivKey($('#manualprivkey').val(), passVal);
+             if(passVal=='')
+                    $("#pindiv").show();
+             else
+                    $("#decryptwalletpin").val(passVal);
 			walletDecryptSuccess(0);
 		} catch (err) {
 			walletDecryptFailed(0, "Invalid password");

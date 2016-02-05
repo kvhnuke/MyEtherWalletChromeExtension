@@ -12,6 +12,19 @@ function getAllNickNames(callback){
         callback(nickNames);
     });
 }
+function getAllAccounts(callback){
+    var accounts = [];
+    storage.get(null, function(items) {
+        for (var key in items) {
+            if (items.hasOwnProperty(key)) {
+                var tobj = JSON.parse(items[key]);
+                 if(tobj.type=='wallet')
+                    accounts.push(key);
+            }
+        }
+        callback(accounts);
+    });
+}
 function addWalletToStorage(address, encprivkey, nickname, callback){
     nickname = nickname.replace(/(<([^>]+)>)/ig,"");
     var value = {nick:nickname, priv:encprivkey, type:'wallet'};
