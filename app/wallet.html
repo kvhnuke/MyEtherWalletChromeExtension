@@ -101,7 +101,7 @@
                 <p> Viewing the wallet details allows you to view the wallet's private key, save the wallet's JSON file, and print the paper wallet.</p>
                 <form role="form">
                   <div class="form-group">
-                    <label for="walletName">Enter Your PIN:</label>
+                    <label for="walletName">Enter Your Password:</label>
                     <input type="hidden" value="" id="viewWalletAddress"/>
                     <input type="password" class="form-control" id="viewWalletPin" value="">
                     <div id="viewWalletPopStatus"></div>
@@ -264,9 +264,9 @@
             <!-- if selected type gen new wallet-->
             <div id="selectedGenNewWallet" style="display: none;">
               <div class="form-group col-xs-12">
-                <label> Create a PIN for Your Wallet: </label>
-                <p>You will need to enter this PIN each time you send a transaction from the Chrome Extension. Please use at least 8 characters and do not use a password you use elsewhere. <b>Do not forget this pin</b></p>
-                <input class="form-control" type="text" placeholder="PIN" id="ethgenpassword">
+                <label> Create a Password for Your Wallet: </label>
+                <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
+                <input class="form-control" type="text" placeholder="Password" id="ethgenpassword">
               </div>
               <div class="form-group col-xs-12">
                 <label> Create a Nickname for Your Wallet: </label>
@@ -314,9 +314,9 @@
               <input class="form-control" type="text" placeholder="tayvano's pre-sale wallet" id="decryptwalletnickname" />
             </div>
             <div class="form-group col-xs-12" id="pindiv" style="display: none;">
-              <label> Create a PIN for Your Wallet: </label>
-              <p>You will need to enter this PIN each time you send a transaction from the Chrome Extension. Please use at least 8 characters and do not use a password you use elsewhere. If you forget this PIN, just delete your wallet and re-add it.</p>
-              <input class="form-control" type="text" placeholder="PIN" id="decryptwalletpin" />
+              <label> Create a Password for Your Wallet: </label>
+                <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
+              <input class="form-control" type="text" placeholder="Password" id="decryptwalletpin" />
             </div>
             <div class="form-group col-xs-12">
               <a class="btn btn-info btn-block" id="decryptAddWallet">ADD WALLET </a>
@@ -341,9 +341,8 @@
             </table>
           </div>
           <div class="col-md-4 col-sm-6">
-            <h4> Enter PIN for this Wallet: </h4>
-            <input class="form-control" type="password" placeholder="PIN" id="sendTransactionPin">
-            <p><small>This is the PIN you created via the MyEtherWallet extension when you added your wallet. It has to be at least 8 characters. This is not your private key or password to your encrypted private key.</small></p>
+            <h4> Enter Password for this Wallet: </h4>
+            <input class="form-control" type="password" placeholder="Password" id="sendTransactionPin">
           </div>
           <div class="col-md-4 col-sm-6" id="walletuploadbutton">
             <h4 id="uploadbtntxt-wallet"> Decrypt Wallet:</h4>
@@ -507,7 +506,7 @@
           <li>Please DO reach out to us (click contact above) with any and all feedback you have, especially little bugs, things that confused you, or error messages that don't make sense / have typos.</li>
         </ul>
 
-        <p>MyEtherWallet.com and MyEtherWallet CX is not a "web wallet". You do not create an account or give us your Ether to hold onto. All data is saved on your computer, not our servers. It's not a website where you put your Ether and we store them for you. We just make it easy for you to save your wallet information in your browser/on your computer. Then we give you a place you to access that information and do stuff with it. I know it can be confusing, but when you look at the stuff in the Chrome Extension, you are NOT looking at stuff saved on our servers somewhere - it's all saved on your own computer.</p>
+        <p>MyEtherWallet.com and MyEtherWallet CX are not "web wallets". You do not create an account or give us your Ether to hold onto. All data is saved on your computer, not our servers. It's not a website where you put your Ether and we store them for you. We just make it easy for you to save your wallet information in your browser/on your computer. Then we give you a place you to access that information and do stuff with it. I know it can be confusing, but when you look at the stuff in the Chrome Extension, you are NOT looking at stuff saved on our servers somewhere - it's all saved on your own computer.</p>
 
 
         <h3> What / Why? </h3>

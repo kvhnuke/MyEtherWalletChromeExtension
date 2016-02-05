@@ -10,7 +10,7 @@ Your data is *almost certainly* safe. We store all your data (nickname, wallet a
 - Please DO make sure you are sending to the correct address.
 - Please DO [reach out to us](https://www.myetherwallet.com/#contact) with any and all feedback you have, especially little bugs, things that confused you, or error messages that don't make sense / have typos.
 
-MyEtherWallet.com and MyEtherWallet CX is not a "web wallet". You do not create an account or give us your Ether to hold onto. All data is saved on your computer, not our servers. It's not a website where you put your Ether and we store them for you. We just make it easy for you to save your wallet information in your browser/on your computer. Then we give you a place you to access that information and do stuff with it. I know it can be confusing, but when you look at the stuff in the Chrome Extension, you are NOT looking at stuff saved on our servers somewhere - it's all saved on your own computer.
+MyEtherWallet.com and MyEtherWallet CX are not "web wallets". You do not create an account or give us your Ether to hold onto. All data is saved on your computer, not our servers. It's not a website where you put your Ether and we store them for you. We just make it easy for you to save your wallet information in your browser/on your computer. Then we give you a place you to access that information and do stuff with it. I know it can be confusing, but when you look at the stuff in the Chrome Extension, you are NOT looking at stuff saved on our servers somewhere - it's all saved on your own computer.
 
 ### Adding to Chrome Manually
 
