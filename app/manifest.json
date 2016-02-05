@@ -1,5 +1,5 @@
 {
-  "name": "MyEtherWallet",
+  "name": "MyEtherWallet CX",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "MyEtherWallet Chrome Extension",
@@ -17,7 +17,7 @@
   "options_page": "wallet.html#options",
   "browser_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "Ether Wallet",
+    "default_title": "MyEtherWallet CX",
     "default_popup": "browser_action/browser_action.html"
   },
   "permissions": [
