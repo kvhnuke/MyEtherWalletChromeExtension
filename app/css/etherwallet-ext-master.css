@@ -5581,6 +5581,26 @@ input[type=radio] {
 #etherWalletPopUp .form-group {
   margin-bottom: .5em;
 }
+/* uncss:ignore */
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: default;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.announcement-warning {
+  background-color: #d9534f;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+}
+.announcement-warning a {
+  color: white;
+  text-decoration: underline;
+}
 /* Custom Utilities */
 .text-navy {
   color: #2e4868;
