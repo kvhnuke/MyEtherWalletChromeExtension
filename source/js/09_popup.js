@@ -63,7 +63,7 @@ function decryptAndSendTx() {
 	if (addr == "") {
 		$("#decryptStatus1").html(getErrorText("Please select a wallet.")).fadeIn(50).fadeOut(3000);
 	} else if (pin == "") {
-		$("#decryptStatus1").html(getErrorText("Please enter the pin of the wallet.")).fadeIn(50).fadeOut(3000);
+		$("#decryptStatus1").html(getErrorText("Please enter the password of the wallet.")).fadeIn(50).fadeOut(3000);
 	} else {
 		getWalletFromStorage(addr, function(data) {
 			try {
