@@ -98,7 +98,7 @@ function bindElements() {
 		var nickname = $("#walletNicknameView").html();
 		$("#viewWalletPin").val('');
 		if (pin == "") {
-			$("#viewWalletPopStatus").html(getErrorText("Please enter the pin of the wallet")).fadeIn(50).fadeOut(3000);
+			$("#viewWalletPopStatus").html(getErrorText("Please enter the password of the wallet")).fadeIn(50).fadeOut(3000);
 		} else {
 			getWalletFromStorage(ethAccAddress, function(data) {
 				try {
@@ -112,7 +112,7 @@ function bindElements() {
 						$("#qrcodeAdd").empty();
 						$("#viewWalletDiv").show();
 						$("#qrcodeAdd").empty();
-                        $('#addressIdenticon').css("background-image", 'url(' + blockies.create({ seed:ethAccAddress ,size: 8,scale: 16}).toDataURL()+')');  
+                        $('#addressIdenticon').css("background-image", 'url(' + blockies.create({ seed:ethAccAddress ,size: 8,scale: 16}).toDataURL()+')');
 						new QRCode($("#qrcodeAdd")[0], {
 							text: ethAccAddress,
 							width: $("#qrcode").width(),
@@ -477,7 +477,7 @@ function addDecryptedWallet() {
 	var password = $("#decryptwalletpin").val();
 	var nickname = stripScriptTags($("#decryptwalletnickname").val());
 	if (password == "") {
-		$("#AddDecryptedWalletStatus").html(getErrorText("You must enter a PIN")).fadeIn(50).fadeOut(3000);
+		$("#AddDecryptedWalletStatus").html(getErrorText("You must enter a password")).fadeIn(50).fadeOut(3000);
 	} else if (password.length < 8) {
 		$("#AddDecryptedWalletStatus").html(getErrorText("Your password must be at least 8 characters")).fadeIn(50).fadeOut(3000);
 	} else if (nickname == "") {
@@ -541,7 +541,7 @@ function decryptSendTxData() {
 	if (addr == "") {
 		$("#decryptStatus1").html(getErrorText("Please select a wallet")).fadeIn(50).fadeOut(3000);
 	} else if (pin == "") {
-		$("#decryptStatus1").html(getErrorText("Please enter the pin of the wallet")).fadeIn(50).fadeOut(3000);
+		$("#decryptStatus1").html(getErrorText("Please enter the password of the wallet")).fadeIn(50).fadeOut(3000);
 	} else {
 		getWalletFromStorage(addr, function(data) {
 			try {
@@ -582,7 +582,7 @@ function generateSingleWallet() {
 	var password = $("#ethgenpassword").val();
 	var nickname = stripScriptTags($("#newWalletNick").val());
 	if (password == "") {
-		$("#generatedWallet").html(getErrorText("You must enter a PIN.")).fadeIn(50).fadeOut(3000);
+		$("#generatedWallet").html(getErrorText("You must enter a password.")).fadeIn(50).fadeOut(3000);
 	} else if (password.length < 8) {
 		$("#generatedWallet").html(getErrorText("Your password must be at least 8 characters.")).fadeIn(50).fadeOut(3000);
 	} else if (nickname == "") {

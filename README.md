@@ -74,3 +74,8 @@ TODO. If you want to get involved, reach out to us.
 
 ### Contact
 [View all the ways you can reach us here.](https://www.myetherwallet.com/#contact).
+
+
+### TODO
+- Add address identicons to the table, not just the details.
+
