@@ -32,8 +32,7 @@
     </div>
 
     <div class="form-group">
-      <label><strong> To Address </strong></label>
-      <input style="display:none;" class="form-control" type="text" placeholder="0x7cb57b5a97eabe94205c07890be4c1ad31e486a8" id="sendtxaddress" value="0x7cb57b5a97eabe94205c07890be4c1ad31e486a8"/>
+      <input  class="form-control" type="hidden" placeholder="0x7cb57b5a97eabe94205c07890be4c1ad31e486a8" id="sendtxaddress" value="0x7cb57b5a97eabe94205c07890be4c1ad31e486a8"/>
       <div id="addressvalidate"></div>
     </div>
 
@@ -64,8 +63,10 @@
       You are about to send
       <strong id="confirmAmount" class="text-success"> 345 </strong>
       <strong id="confirmCurrancy" class="text-success"> Ether </strong>
-      to address
-      <strong id="confirmAddress" class="text-danger"> 0x928342938472938 </strong>.
+      to address:
+      <strong id="confirmAddress" class="text-danger word-wrap"> 0x928342938472938 </strong>
+      from
+      <strong id="popupNickName"> wallet nickname </strong>.
     </p>
     <label><strong>Enter Your PIN:</strong></label>
     <input class="form-control" type="password" placeholder="Your MyEtherWallet Pin" id="sendTransactionPin">
@@ -74,7 +75,7 @@
       <a id="cancelTransaction" class="btn btn-default" style="width:49%"> Cancel </a>
       <a id="approveTransaction" class="btn btn-primary" style="width:49%"> Send Transaction </a>
     </div>
-    <div id="decryptStatus1"></div>
+    <div id="decryptStatus1" class="word-wrap"></div>
   </section>
 <!-- STEP 2 - CONFIRM -->
 

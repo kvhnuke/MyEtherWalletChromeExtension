@@ -14,10 +14,10 @@ function checkAndLoadPageHash() {
 		var phash = window.location.hash.substr(1);
 		$(".ptabs").each(function(index) {
 			if ($(this).attr('id') == phash) {
-				$(this).click();
+				paneNavigate($(this).attr('showId'), this.id);
 				setTimeout(function() {
 					$('html,body').scrollTop(0);
-				}, 50);
+				}, 300);
 				return;
 			}
 		});
@@ -25,10 +25,10 @@ function checkAndLoadPageHash() {
 }
 
 function paneNavigate(showEleId, activeEleId) {
+    location.hash = activeEleId;
 	hideAllMainContainers();
 	$("#" + showEleId).show();
 	$("#" + activeEleId).parent().addClass('active');
-	location.hash = activeEleId;
 	onTabOpen(activeEleId);
 	$('html,body').scrollTop(0);
 }
@@ -46,7 +46,9 @@ function onTabOpen(tabid) {
 function bindElements() {
 	$(".ptabs").each(function(index) {
 		$(this).click(function() {
-			paneNavigate($(this).attr('showId'), this.id);
+		  location.hash = this.id;
+          location.reload();
+		//	paneNavigate($(this).attr('showId'), this.id);
 		});
 	});
 	$("#btndonate").click(function() {
@@ -109,6 +111,7 @@ function bindElements() {
 						$("#qrcodeAdd").empty();
 						$("#viewWalletDiv").show();
 						$("#qrcodeAdd").empty();
+                        $('#addressIdenticon').css("background-image", 'url(' + blockies.create({ seed:ethAccAddress ,size: 8,scale: 16}).toDataURL()+')');  
 						new QRCode($("#qrcodeAdd")[0], {
 							text: ethAccAddress,
 							width: $("#qrcode").width(),
@@ -194,6 +197,11 @@ function bindElements() {
 		$("#selectedUploadKey").hide();
 		$("#selectedGenNewWallet").hide();
 		$("#newWalletGenButtonDiv").hide();
+        $("#walletpreview0").hide();
+        $("#decryptwalletpin").val('');
+        $("#decryptwalletnickname").val('');
+		$("#ethgenpassword").val('');
+		$("#newWalletNick").val('');
 		if (this.value == 'fileupload') {
 			$("#selectedUploadKey").show();
 			decryptType = "fupload";
@@ -328,6 +336,7 @@ function preCreateTransaction() {
 		$("#txsendstatus").html('')
 		var toAddress = $('#sendtxaddress').val();
 		if (PrivKey.length != 64) throw "Invalid Private key, try again";
+        if (formatAddress(strPrivateKeyToAddress(PrivKey),'hex')==toAddress) throw "You cannot send ether to yourself";
 		if (!validateEtherAddress(toAddress)) throw "Invalid to Address, try again";
 		if (!$.isNumeric($('#sendtxamount').val()) || $('#sendtxamount').val() <= 0) throw "Invalid amount, try again";
 		var etherUnit = $('input[type=radio][name=currencyRadio]:checked').val();
@@ -454,7 +463,7 @@ function formatCurrency(n, currency) {
 function walletDecryptSuccess(id) {
 	$("#accountAddress" + id).html(formatAddress(strPrivateKeyToAddress(PrivKey), 'hex'));
 	setWalletBalance(id);
-	$("#decryptStatus" + id).html('<p class="text-center text-success"><strong> Wallet successfully decrypted</strong></p>').fadeIn(2000);
+	$("#decryptStatus" + id).html('<p class="text-center text-success"><strong> Wallet successfully decrypted</strong></p>').fadeIn(2000).fadeOut(5000);
 	$("#walletpreview" + id).show();
 }
 
@@ -485,7 +494,11 @@ function addDecryptedWallet() {
 			if (chrome.runtime.lastError) {
 				$("#AddDecryptedWalletStatus").html(getErrorText(chrome.runtime.lastError.message)).fadeIn(50).fadeOut(3000);
 			} else {
-				$("#AddDecryptedWalletStatus").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000);
+				$("#AddDecryptedWalletStatus").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000, function(){
+                    $("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked",true);
+                    $('input[type=radio][name=typeOfKeyRadio]').change();
+				    $('*[showid="paneWallets"]').click();
+                });
 				setNickNames();
 			}
 		});
@@ -499,7 +512,12 @@ function decryptFormData() {
 		var fr = new FileReader();
 		fr.onload = function() {
 			try {
-				PrivKey = getWalletFilePrivKey(fr.result, $('#walletfilepassword').val());
+                var passVal = $('#walletfilepassword').val();
+				PrivKey = getWalletFilePrivKey(fr.result, passVal);
+                if(passVal=='')
+                    $("#pindiv").show();
+                else
+                    $("#decryptwalletpin").val(passVal);
 				walletDecryptSuccess(0);
 			} catch (err) {
 				walletDecryptFailed(0, err);
@@ -583,8 +601,8 @@ function generateSingleWallet() {
 			} else {
 				$("#generatedWallet").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000);
 				setNickNames();
-				$("#ethgenpassword").val('');
-				$("#newWalletNick").val('');
+                $("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked",true);
+                $('input[type=radio][name=typeOfKeyRadio]').change();
                 $('*[showid="paneWallets"]').click();
 			}
 		});

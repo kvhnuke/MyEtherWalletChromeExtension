@@ -14,6 +14,7 @@ function bindPopElements() {
 	$("#popPreSend").click(function() {
 		try {
 			var selectedAcc = $("input[name=selectedWallet]:checked").val();
+            var nickName = $("input[name=selectedWallet]:checked").parent().text();
 			var toAddress = $('#sendtxaddress').val();
 			var sendAmount = $('#sendtxamount').val();
 			if (typeof selectedAcc == 'undefined') throw "Whoops. An account was not selected.";
@@ -24,6 +25,7 @@ function bindPopElements() {
 			$("#confirmAmount").html(sendAmount);
 			$("#confirmCurrancy").html(etherUnit);
 			$("#confirmAddress").html(toAddress);
+            $("#popupNickName").html(nickName);
 			$("#popupConfirmSend").show();
 			$("#sendTransMain").hide();
 		} catch (err) {
@@ -50,7 +52,8 @@ function bindPopElements() {
 		$("#sendTransMain").show();
 	});
 	$("#approveTransaction").click(function() {
-		decryptAndSendTx();
+	   if(!$("#approveTransaction").hasClass('disabled'))
+		  decryptAndSendTx();
 	});
 }
 
@@ -70,12 +73,11 @@ function decryptAndSendTx() {
 					var sendAmount = $('#sendtxamount').val();
 					var etherUnit = $('input[type=radio][name=currencyRadio]:checked').val();
 					var weiAmount = toWei(sendAmount, etherUnit);
+                    $("#approveTransaction").addClass('disabled');
 					createTransaction(PrivKey, toAddress, weiAmount, function(data) {
 						var signedtx = data.signed;
 						sendTransaction(signedtx, function(data) {
-							$("#decryptStatus1").html('<p class="text-center text-success"><strong> Success! Transaction submitted. TX ID: ' + data + '</strong></p>').fadeIn(50).fadeOut(3000,function() {
-								location.reload();
-							});
+							$("#decryptStatus1").html('<p class="text-center text-success"><strong> Success! Transaction submitted. TX ID: ' + data + '</strong></p>').fadeIn(50);
 						}, function(err) {
 							$("#decryptStatus1").html('<p class="text-center text-danger"><strong>' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
 						});
