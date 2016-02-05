@@ -5,7 +5,7 @@
 ### Why is it Beta? Am I safe?
 Your data is *almost certainly* safe. We store all your data (nickname, wallet address, and private key) in [chrome.storage](https://developer.chrome.com/extensions/storage). This is the same place Chrome saves your passwords. The private key is encrypted. The majority of code comes directly from MyEtherWallet.com. However, we want more people to use it in unpredictable ways before we launch-launch.
 
-- Please DO avoid saving wallets with more Ether than you are willing to lose.
+- Please DON'T save wallets with more Ether than you are willing to lose.
 - Please DON'T forget to save your private key / password when you create a new wallet. Save them externally - not just on your computer! We wrote thorough instructions on the help page in the extension.
 - Please DO make sure you are sending to the correct address.
 - Please DO [reach out to us](https://www.myetherwallet.com/#contact) with any and all feedback you have, especially little bugs, things that confused you, or error messages that don't make sense / have typos.
