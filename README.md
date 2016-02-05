@@ -78,4 +78,5 @@ TODO. If you want to get involved, reach out to us.
 
 ### TODO
 - Add address identicons to the table, not just the details.
-
+- Sometimes balance doesn't load - start with "loading..." instead of "0 wei"
+- Add shortcut to send between one of your own wallets to your other wallets.
