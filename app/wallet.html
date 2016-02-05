@@ -545,62 +545,142 @@
       <div class="tab-pane" id="paneHelp" style="display: none;">
         <h2> Help </h2>
         <p>Do you see something missing? Have another question? <a id="contact" class="ptabs" showId="paneContact">Get in touch with us</a> and we will not only answer your question, we will update this page so it can be more useful to people like you in the future!</p>
-        <h3> How To Create a New Wallet </h3>
+
+        <h3> How To Create a New Wallet on MyEtherWallet CX</h3>
         <ol>
-          <li>Choose a password (see below for an explanation of this password) to create a new wallet / private key.</li>
-          <li>Save the address.</li>
-          <li>Save your public key. You can keep it to yourself or share it with others. That way, others can transfer ether to you. They can't take your money with the public key.</li>
-          <li>Save the private key and back it up. Do not show it to anyone else. Your private key is not needed to receive ether, only to withdraw.</li>
-          <li>Be sure to save the private key. Use our print functionality. Save it! It is required the day you want to withdraw ether. <strong>Forget it, and the ether on the address are lost forever.</strong></li>
+          <li> Go to the "Add New Wallet Tab". </li>
+          <li> Click "Generate New Wallet". </li>
+          <li> Enter a PIN for your wallet. The PIN encrypts <em> all information</em> for this wallet within the Chrome Extension, as well as encrypting the private key for wallets generated using MyEtherWallet CX. <strong>We recommend using a very strong PIN.</strong></li>
+          <li> Enter a "nickname" for you wallet. This is just so you can recognize and differentiate between your wallets more easily.</li>
+          <li> Click the "GENERATE" button.</li>
+          <li> Your wallet has been successfully added. You can now go to the "Wallets" tab in order to see all your wallets, edit the nickname, view the details (private keys, JSON files, QR codes, etc), and remove the wallet.</li>
+          <li> Next: BACK UP YOUR WALLET EXTERNALLY! (See below).</li>
         </ol>
 
-        <h3> How to Transfer Ether from One Wallet to Another </h3>
-        <p>If you just created a new wallet, you might want to send ether from your pre-sale wallet to this new wallet.</p>
+        <h3> How To Add an Existing Wallet on MyEtherWallet CX</h3>
         <ol>
-          <li><strong>BEFORE YOU START</strong>: If you plan to move a large amount of ether, you should test sending a small amount to make sure you have full control over it. First, transfer a small amount to your address. After a minute, it should show up in a blockchain explorer, e.g. <a href="https://www.etherchain.org" target="_blank">https://www.etherchain.org</a>. Lastly, make sure the address that received that small amount is YOUR ADDRESS.</li>
-          <li>Navigate to the <a id="send-transaction" class="ptabs" showId="paneSendTrans">"Send Transaction"</a> tab, and paste / upload your private key from the pre-sale wallet or the wallet you want to transfer from.</li>
-          <li> <strong>Pre-Sale Wallet:</strong> look for the file called something like <code>"ethereum_wallet_backup.json"</code> and upload that file. This wallet file will be encrypted with a password that you created during the purchase of the pre-sale.</li>
-          <li> <strong> Geth Wallet:</strong> Your wallet files should be located in the following locations, depending on your OS.
-            <br /> <strong>Mac:</strong> <code>~/Library/Ethereum/keystore</code> <strong>Linux:</strong> <code>~/.ethereum/keystore</code> <strong>Windows:</strong> <code>%APPDATA%/Ethereum/keystore</code></li>
-          <li> If the wallet is the encrypted, a textbox will automatically appear. Enter the password here. (Problems? See #12)</li>
-          <li> Click the "DECRYPT" button and wait a couple seconds.</li>
-          <li> You will now see your account information. It'll show your address, your balance, and have a space for the <em>Receiving Address</em> and the <em>Amount you want to send</em>.</li>
-          <li> Remember, if this is a brand new wallet you are transferring to, let's test with a little bit before we go all <a href="https://youtu.be/X1UFtR8KUT8?t=330" target="_blank">FREEEEEDOOOOMMMM!!!</a> See step #1.</li>
-          <li> Otherwise, once you are certain, go for it. Enter the to address and the amount and click "GENERATE TRANSACTION"</li>
-          <li> Success! </li>
-        </ol>
-        <p> Note: Some people have been accidentally typing addresses without the prefix "0x". All addresses start with 0x. Others have been losing characters off the end. We have validation on our site that doesn't allow you to send to addresses without this prefix, and our validation verifies that the address you are sending to is valid. Regardless of any validation measures in place on our site or other sites, ALWAYS BE CAREFUL. DOUBLE CHECK YOUR ADDRESS BEFORE SENDING. PLEASE!</p>
-        <p> Note #2: If you have forgotten your password to your pre-sale wallet, these discussions may be helpful: <a href="https://forum.ethereum.org/discussion/3045/request-post-password-instructions-that-were-given-for-the-presale-last-year" target="_blank">[1: forum.ethereum.org]</a> <a href="https://www.reddit.com/r/ethereum/comments/3g6aw0/i_lost_my_password_to_my_presale_wallet_admit_it/" target="_blank">[2: /r/ethereum]</a></p>
+          <li> Go to the "Add New Wallet Tab". </li>
+          <li> Click "Upload your wallet file (Presale/Geth/etherwallet)." -or- "Paste / type your private key (Encrypted/Unencrypted)." </li>
+          <li> Select your wallet file (JSON) or paste your private key.</li>
+          <li> If prompted, enter the password you created when you created your wallet.</li>
+          <li> Click "DECRYPT"</li>
+          <li> The wallet's information will display.</li>
+          <li> Enter a "nickname" for you wallet. This is just so you can recognize and differentiate between your wallets more easily.</li>
+          <li> Enter a PIN for your wallet. The PIN encrypts <em> all information</em> for this wallet within the Chrome Extension. <strong>We recommend using a very strong PIN.</strong></li>
+          <li> Click the "ADD WALLET" button.</li>
+          <li> Your wallet has been successfully added. You can now go to the "Wallets" tab in order to see all your wallets, edit the nickname, view the details (private keys, JSON files, QR codes, etc), and remove the wallet.</li>
+          <li> Note: just because you have saved your wallet here, it does not mean you should lose your private key, password, etc. Keep all that information safe, perferably on your computer and somewhere besides your computer.</li>
         </ol>
 
-        <h3> So, what is that password thing all about? </h3>
-        <p>The password that you entered at the very beginning to create a new wallet / account is used to encrypt your private key. This enables you to have a safer version of your private key file.</p>
-        <p> Basically, all it means is when you upload your private key file, you will also need to enter the password that you chose when you created your private key in order to decrypt it.</p>
-        <p> MyEtherWallet can decrypt geth / pre-sale wallets, but geth <strong> cannot </strong> decrypt wallets encrypted by MyEtherWallet.</p>
-        <p> We allow you to save both the encrypted and decrypted private keys / .json files on MyEtherWallet. If you plan on not touching a wallet created on MyEtherWallet for a long, long time it may be prudent to save the unencrypted private key / .json file so you can access it via geth, the official Ethereum GUI wallet, or whatever else is around in the distant future.</p>
+        <h3> How do I save/backup my wallet externally?</h3>
+        <p> You should always back up your wallet externally - like on a flash drive, in cloud storage (Dropbox, etc), and/or a piece of paper. You can view your wallets information at any time by going to to the "Wallets" tab and clicking "View Wallet Details".</p>
+        <ol>
+          <li>Save the address (you may know this as your public key). You can keep it to yourself or share it with others. That way, others can transfer ether to you. They can't take your money with the address.</li>
+          <li>Save the private key and back it up. Do not show it to anyone else. Your private key is not needed to receive ether, only to withdraw or generate transactions.</li>
+          <li>If you download the encrypted Private Key or encrypted JSON file, you will need the PIN you chose upon creating the wallet to decrypt it. So make sure to save the unencrypted versions of the file or save the password along with the encrypted versions.</li>
+          <li>Be sure to save the private key and/or JSON file. Use our print functionality. Save it! It is required the day you want to withdraw ether. <strong>Forget it, and the ether on the address are lost forever.</strong></li>
+          <li> You can also save the JSON file. They are just a different way of storing your private key / information.</li>
+        </ol>
+
+        <h3> What's the Difference between a PIN and a Password?</h3>
+        <p>Alright, we know this can be confusing so stick with us.</p>
+        <p>A <strong>PIN</strong> is exclusive to MyEtherWallet Chrome Extension. It is used to encrypt all your information within chrome.storage. You need to enter your PIN whenever you do things like view your wallet details or send a transaction.</p>
+        <ul>
+          <li> When you generate a <em>new wallet</em> using MyEtherWallet CX, the PIN is also the PASSWORD. If you take the encrypted private key to MyEtherWallet.com, you will use the PIN to decrypt it.</li>
+          <li> So, let's say you create a wallet on MyEtherWallet CX, back up all your information, and then remove the wallet from the extension. Later, you want to send a transaction using that wallet on MyEtherWallet.com. You would simply upload the encrypted key/JSON file, enter the PIN (which is the same as your password) in the password field, and generate the transaction.</li>
+          <li> If you were to re-add the wallet on MyEtherWallet CX, you would do the same but you would then create a new PIN to encrypt all your information within the extension. The original PIN is your password and will always be your password.</li>
+        </ul>
+
+        <p> A <strong>password</strong> is what is typically used to decrypt encrypted private keys. MyEtherWallet.com uses passwords. So do the pre-sale wallets. If you upload an <em>existing wallet</em> using your encrypted private key to MyEtherWallet CX here is what happens:</p>
+        <ol>
+          <li>You enter your encrypted private key or upload your JSON file.</li>
+          <li>You decrypt that encrypted private key/JSON file using the password you used when creating the wallet.</li>
+          <li>MyEther Wallet CX asks you to create a PIN, which encrypts <em>all</em> the information that is stored in the extension, including the private key.</li>
+          <li>The password is not replacing the PIN. The PIN is just an added level of encryption. If you were to use that wallet elsewhere, you would decrypt it using the original password you created.</li>
+        </ol>
+        <p> This only really applies to <em> encrypted </em> private keys. If you save your <em> unencrypted </em> private key/JSON file, then you don't need a password to decrypt it. Within the extension, everything is encrypted using the PIN so you will still need that when interacting with your wallet within the extension.</p>
+
+        <p> Last note: MyEtherWallet can decrypt geth / pre-sale wallets, but geth <strong> cannot </strong> decrypt wallets encrypted by MyEtherWallet. We allow you to save both the encrypted and decrypted private keys / JSON files on MyEtherWallet. If you plan on not touching a wallet created on MyEtherWallet for a long, long time it may be prudent to save the unencrypted private key / JSON file so you can access it via geth, the official Ethereum GUI wallet, or whatever else is around in the distant future.</p>
+
+
+        <h3> How to Send Ether using MyEtherWallet CX </h3>
+        <p>First, you need to add a wallet. Once you have done that, you have 2 options: the "QuickSend" functionality from the Chrome Extension icon or the "Send Transaction" tab.</p>
+        <p><strong> QuickSend: </strong></p>
+        <ol>
+          <li>Copy the address you wish to send Ether to, to your clipboard.</li>
+          <li>Click the Chrome Extension Icon.</li>
+          <li>Click the green "QuickSend" button. </li>
+          <li>Select the wallet you wish to send from.</li>
+          <li> Paste the address that you copied earlier into the address field.</li>
+          <li> Enter the amount you would like to send. You can also click the [Send total available balance] link if you would like the transfer the entire balance.</li>
+          <li> Click "Send Transaction". </li>
+          <li> Verify the address and the amount you are sending is correct.</li>
+          <li> Enter your PIN. </li>
+          <li> Click "Send Transaction." </li>
+        </ol>
+
+        <p><strong> Using "Send Transaction" Tab: </strong></p>
+        <ol>
+          <li> Go to the Send Transaction Tab.</li>
+          <li> Select the wallet you wish to send from.</li>
+          <li> Enter the PIN.</li>
+          <li> Press the DECRYPT button.</li>
+          <li> Enter the address you would like to send to in the "To Address:" field.</li>
+          <li> Enter the amount you would like to send. You can also click the [Click here to transfer total available balance] link if you would like the transfer the entire balance.</li>
+          <li> Click "Generate Transaction" Button. </li>
+          <li> A couple more fields will appear. Click the blue "SEND TRANSACTION" button below that.</li>
+          <li> A Pop-Up will appear. Verify that the amount and the address you are sending to are correct. Then click "Yes, I am sure! Make transaction."</li>
+          <li> The transaction will be submitted. The TX ID will display. You can copy that TX ID and paste it into the search bar on etherchain to verify the transaction went through.</li>
+          <li> DONE! </li>
+        </ol>
+
 
         <h3> How does the Send Transaction work? </h3>
         <p> When you send a transaction, it only sends the signed transaction. Your private key safely stays with you.</p>
 
-        <h3> Why hasn't the address show up in the blockchain explorer? (ie: etherchain, etherscan) </h3>
+        <h3> Why hasn't the wallet I just created show up in the blockchain explorer? (ie: etherchain, etherscan) </h3>
         <p> Addresses will only show up in a blockchain explorer once the account has activity on it&mdash;for example, once you have transferred some Ether to it. </p>
 
         <h3> How do I check the balance of my account? </h3>
-        <p> You can use a blockchain explorer like <a href="https://www.etherchain.org" target="_blank">etherchain.org</a> or <a href="http://etherscan.io/" target="_blank">etherscan.io</a>. Paste your address into the search bar and it will pull up your address and transaction history. For example, here's what our <a href="https://etherchain.org/account/0x7cb57b5a97eabe94205c07890be4c1ad31e486a8" target="_blank">donation account</a> looks like on etherchain.org.</p>
+        <p> Once you add a wallet to MyEtherWallet Chrome Extension, the balance will display in the Wallets tab, as well as when you click the Chrome Extension Icon.</p>
+        <p> You can also use a blockchain explorer like <a href="https://www.etherchain.org" target="_blank">etherchain.org</a> or <a href="http://etherscan.io/" target="_blank">etherscan.io</a>. Paste your address into the search bar and it will pull up your address and transaction history. For example, here's what our <a href="https://etherchain.org/account/0x7cb57b5a97eabe94205c07890be4c1ad31e486a8" target="_blank">donation account</a> looks like on etherchain.org.</p>
 
-        <h3> Where the hell is my geth wallet files? </h3>
+        <h3> Where the hell is my geth wallet file? </h3>
         <ul>
           <li>Mac: <code>~/Library/Ethereum/keystore</code></li>
           <li>Linux: <code>~/.ethereum/keystore</code></li>
           <li>Windows: <code>%APPDATA%/Ethereum/keystore</code></li>
         </ul>
 
-        <h3> What happens if your site goes down? </h3>
-        <p>There seems to be a lot of confusion about what MyEtherWallet does. It's not a web wallet where you put your Ether and we store them for you. You don't have a login and nothing ever gets saved to our servers. It is simply an interface that allows you to do things you normally would do via command line.</p>
-        <p>So, if MyEtherWallet goes down, you would have to find another way (like geth) to do what we are doing. But you wouldn't have to "get" your ether out of MyEtherWallet because it's not in MyEtherWallet. It's in whatever wallet your generated via our site.</p>
-        <p>In addition, the likelihood of us taking MyEtherWallet down is slim to none. It costs us almost nothing to maintain as we aren't storing any information. If we do take the domain down, it's still is, and always will be, publicly available at <a href="https://github.com/kvhnuke/etherwallet" target="_blank">https://github.com/kvhnuke/etherwallet</a>. You can download the ZIP there and run it locally.</p>
 
-        <h3> Security </h3>
+        <h3> What happens if MyEtherWallet CX disappears from the face of this planet? </h3>
+        <p>First, all data is saved on your computer, not our servers. It's not a website where you put your Ether and we store them for you. We just make it easy for you to save your wallet information in your browser, and we give you a place you to access that information and do stuff with it.</p>
+        <p> That said, it is <strong>very important</strong> that you back up all your information for any new wallets generated with MyEtherWallet CX externally (meaning not on your computer!). That way if anything happens to MyEtherWallet CX or your computer, you still have all the information necessary to access your Ether. See the above section for how to save your wallets externally.</p>
+
+        <p> If for some reason MyEtherWallet CX disappears from the Chrome Store, you can find the source on Github and load it manually.</p>
+        <ul>
+          <li>Go to <a href="https://github.com/kvhnuke/MyEtherWalletChromeExtension" target="_blank">the github repo</a></li>
+          <li> Download the ZIP file using the button in the upper right.</li>
+          <li> Unzip that file. </li>
+          <li> Open up the folder that you just unzipped. </li>
+          <li> Go to Google Chrome and find you settings (in the menu in the upper right).</li>
+          <li> Click "extensions" on the left. </li>
+          <li> Check the "developer mode" button at the top of that page. </li>
+          <li> Click the "Load unpacked extension..." button.</li>
+          <li> Navigate to the now-unzipped folder that you downloaded earlier. </li>
+          <li> Click the "app" folder and then click "select".</li>
+          <li> The extension should now show up in your extensions and in your Chrome Extension bar. </li>
+        </ul>
+
+        <h3> Security - MyEtherWallet CX </h3>
+        <p> This information is new and pertains to the MyEtherWallet Chrome Extension only. To read our spiel about us / MyEtherWallet.com, see below.</p>
+        <ul>
+          <li> The information you store in this Chrome Extension is saved to chrome.storage.</li>
+        </ul>
+
+
+
+        <h3> Security - MyEtherWallet.com </h3>
         <p> One of your first questions is, "Why should I trust these people?" You are probably worried that this site isn't secure. That is a good thing. When dealing with currency and the internet, you should be paranoid. But, let's try to be a bit reasonable.</p>
 
         <p> At this point, we have not had our code audited. Apparently, it costs a fair bit of money to get code audited. If you or a team you know would be willing to help us out in the auditing department, please let us know. <a href="https://www.reddit.com/r/ethereum/comments/3hh89n/could_someone_please_audit_ether_wallet/">Here is a reddit thread with another user asking for someone to audit us.</a> Reach out to us on reddit or github or <a id="contact" class="ptabs" showId="paneContact"> where ever</a>.</p>
