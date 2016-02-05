@@ -8,17 +8,18 @@ $(document).ready(function() {
 	bindElements();
 	checkAndLoadPageHash();
 });
-
+$(window).load(function() {
+    $('html,body').scrollTop(0);
+    setTimeout(function() {
+        $('html,body').scrollTop(0);
+    }, 1);
+});
 function checkAndLoadPageHash() {
 	if (window.location.hash) {
 		var phash = window.location.hash.substr(1);
 		$(".ptabs").each(function(index) {
 			if ($(this).attr('id') == phash) {
 				paneNavigate($(this).attr('showId'), this.id);
-				setTimeout(function() {
-					$('html,body').scrollTop(0);
-				}, 300);
-				return;
 			}
 		});
 	}
