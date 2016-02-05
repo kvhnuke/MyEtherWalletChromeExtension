@@ -36,3 +36,12 @@
     margin-bottom: .5em;
   }
 }
+
+/* uncss:ignore */
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: @cursor-disabled;
+  .opacity(.65);
+  .box-shadow(none);
+}
