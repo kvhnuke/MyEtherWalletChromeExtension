@@ -1,13 +1,15 @@
+## MyEtherWallet Chrome Extension / MyEtherWallet CX
+
 ### 2/4/2016: We have BETA LAUNCHED! You can now manually load this Chrome Extension and play with it. Instructions below.
 
 ### Why is it Beta? Am I safe?
 Your data is *almost certainly* safe. We store all your data (nickname, wallet address, and private key) in [chrome.storage](https://developer.chrome.com/extensions/storage). This is the same place Chrome saves your passwords. The private key is encrypted. The majority of code comes directly from MyEtherWallet.com. However, we want more people to use it in unpredictable ways before we launch-launch.
 
-Please, don't forget to save your private key / password when you create a new wallet.
+Please, DON'T forget to save your private key / password when you create a new wallet. Save them externally - not just on your computer! We wrote thorough instructions on the help page in the extension.
 
-Please make sure you are sending to the correct address.
+Please DO make sure you are sending to the correct address.
 
-Please don't [reach out to us](https://www.myetherwallet.com/#contact) with any and all feedback you have, especially little bugs, things that confused you, or error messages that don't make sense / have typos.
+Please DO [reach out to us](https://www.myetherwallet.com/#contact) with any and all feedback you have, especially little bugs, things that confused you, or error messages that don't make sense / have typos.
 
 ### A Reminder
 
@@ -30,7 +32,7 @@ MyEtherWallet.com and MyEtherWallet CX is not a "web wallet". You do not create 
 
 Read them. I spent way too much time writing and re-writing them. Let me know about the typos - I'm sure there are a few.
 
-### MyEtherWallet Chrome Extension / MyEtherWallet CX
+### The Basics
 
 This is a companion project to [MyEtherWallet.com](https://www.myetherwallet.com) - an open source, javascript, client-side tool for generating Ether wallets. [github link](https://github.com/kvhnuke/etherwallet).
 
