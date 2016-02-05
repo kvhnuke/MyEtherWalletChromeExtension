@@ -523,9 +523,11 @@ mark,
 .text-capitalize {
   text-transform: capitalize;
 }
+/*uncss:ignore*/
 .text-muted {
   color: #777777;
 }
+/*uncss:ignore*/
 .text-primary {
   color: #2bb2dd;
 }
@@ -533,6 +535,7 @@ a.text-primary:hover,
 a.text-primary:focus {
   color: #21a4ce;
 }
+/*uncss:ignore*/
 .text-success {
   color: #449d44;
 }
@@ -540,6 +543,7 @@ a.text-success:hover,
 a.text-success:focus {
   color: #3d8b3d;
 }
+/*uncss:ignore*/
 .text-info {
   color: #1e3045;
 }
@@ -547,6 +551,7 @@ a.text-info:hover,
 a.text-info:focus {
   color: #172333;
 }
+/*uncss:ignore*/
 .text-warning {
   color: #ec971f;
 }
@@ -554,6 +559,7 @@ a.text-warning:hover,
 a.text-warning:focus {
   color: #df8a13;
 }
+/*uncss:ignore*/
 .text-danger {
   color: #c9302c;
 }
