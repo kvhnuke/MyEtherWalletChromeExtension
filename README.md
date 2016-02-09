@@ -77,7 +77,9 @@ TODO. If you want to get involved, reach out to us.
 
 
 ### TODO
-- Add address identicons to the table, not just the details.
 - Sometimes balance doesn't load - start with "loading..." instead of "0 wei"
 - Add shortcut to send between one of your own wallets to your other wallets.
-- Empty state for wallet.html#wallets
+- Add the ether address in the chrome display to easy copy and paste (from reddit thread)
+- The font in the chrome display is thin, thus the period is not visible. (from reddit thread)
+- Would be nice if on quick send it defaulted to the only wallet you have if you have just one created. (from reddit thread)
+- When generating a new wallet, the password is shown in plaintext instead of dots. I would rather have them shown as dots, perhaps with a optional ticker to show the plaintext. (from reddit thread)
