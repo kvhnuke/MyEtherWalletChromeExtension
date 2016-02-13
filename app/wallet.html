@@ -21,8 +21,8 @@
       <p>Open Source JavaScript Client-Side Ether Wallet <strong>Chrome Extension!</strong></p>
     </section>
   </header>
-  <div class="announcement-warning"> MyEtherWallet CX is in Beta. <br /> Please avoid saving wallets with more Ether than you are willing to lose. Be careful & be aware of what you are doing. Read the help page. Send us feedback, bugs, and typos. </div>
-
+  <div class="announcement-warning"> MyEtherWallet CX is in Beta.
+    <br /> Please avoid saving wallets with more Ether than you are willing to lose. Be careful & be aware of what you are doing. Read the help page. Send us feedback, bugs, and typos. </div>
 
 
   <!-- navtabs -->
@@ -35,9 +35,11 @@
       <li> <a id="contact" class="ptabs" showId="paneContact">                Contact           </a></li>
     </ul>
   </section>
+  <!-- end navtabs -->
   <br />
-  <!-- tab panes -->
 
+
+  <!-- tab panes -->
   <section class="container" style="min-height: 70%">
 
     <div class="tab-content">
@@ -74,7 +76,7 @@
                 <form role="form">
                   <div class="form-group">
                     <label for="walletName">Wallet Name</label>
-                    <input type="hidden" value="" id="editWalletAddress"/>
+                    <input type="hidden" value="" id="editWalletAddress" />
                     <input type="text" class="form-control" id="walletName" value="">
                   </div>
                 </form>
@@ -102,7 +104,7 @@
                 <form role="form">
                   <div class="form-group">
                     <label for="walletName">Enter Your Password:</label>
-                    <input type="hidden" value="" id="viewWalletAddress"/>
+                    <input type="hidden" value="" id="viewWalletAddress" />
                     <input type="password" class="form-control" id="viewWalletPin" value="">
                     <div id="viewWalletPopStatus"></div>
                   </div>
@@ -128,7 +130,7 @@
               </div>
               <div class="modal-body">
                 <h4>Warning! You are about to remove your wallet.</h4>
-                <input type="hidden" value="" id="deleteWalletAddress"/>
+                <input type="hidden" value="" id="deleteWalletAddress" />
                 <p> Be sure you have <strong>saved the private key/JSON file and the password</strong> associated with this wallet before you remove it.</p>
                 <p> If you want to use this wallet with your MyEtherWallet CX in the future, you will need to manually re-add it using the private key/JSON and password.</p>
                 <h4>Are you <span class="text-underline"> sure </span> you want to do this?</h4>
@@ -159,14 +161,13 @@
             <div class="col-sm-6">
               <div class="row">
                 <div class="form-group col-sm-10">
-                  <h4>Your Address:
-
-                <div class="account-help-icon">
-                  <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
-                  <span class="account-help-text">You may know this as your "Account #" or your "Public Key". It's what you send people so they can send you ETH.</span>
-                </div>
-
-                  </h4>
+                  <h4>
+                    Your Address:
+                    <div class="account-help-icon">
+                      <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                      <span class="account-help-text">You may know this as your "Account #" or your "Public Key". It's what you send people so they can send you ETH.</span>
+                    </div>
+                </h4>
                   <input class="form-control" type="text" id="address" readonly="readonly">
                 </div>
                 <div class="col-sm-2 address-identicon-container">
@@ -174,42 +175,65 @@
                 </div>
               </div>
               <div class="form-group">
-                <h4>Your Private Key (encrypted):
-
-                <div class="account-help-icon">
-                  <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
-                  <span class="account-help-text">You MUST save the private key or .json file in order to access your account! PLEASE READ THE HELP PAGE IF YOU ARE NOT FAMILIAR WITH THIS PROCESS!</span>
-                </div>
-
+                <h4>
+                    Your Private Key (encrypted):
+                    <div class="account-help-icon">
+                      <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                      <span class="account-help-text">You <strong>need</strong> to save your private key in order to access your wallet in the future. You will need your password to decrypt this private key.</span>
+                    </div>
                 </h4>
                 <textarea class="form-control bigger-on-mobile" type="text" id="privkeyenc" readonly="readonly"></textarea>
               </div>
               <div class="form-group">
-                <h4>Your Private Key (unencrypted):</h4>
+                <h4>
+                    Your Private Key (unencrypted):
+                    <div class="account-help-icon">
+                      <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                      <span class="account-help-text">You <strong>need</strong> to save your private key in order to access your wallet in the future. You do not need your password to decrypt this private key.</span>
+                    </div>
+                </h4>
                 <textarea class="form-control" type="text" id="privkey" readonly="readonly"></textarea>
               </div>
               <div class="row">
                 <div class="form-group col-sm-6">
-                  <h4>QR code (Address):</h4>
+                  <h4>Your Address:</h4>
                   <div id="qrcodeAdd" width="100%"></div>
                 </div>
                 <div class="form-group col-sm-6">
-                  <h4>QR code (Private Key):</h4>
+                  <h4>Private Key (unencrypted):</h4>
                   <div id="qrcode" width="100%"></div>
                 </div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <h4> Print Paper Wallet: </h4>
+                <h4>
+                  Print Paper Wallet:
+                  <div class="account-help-icon">
+                    <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                    <span class="account-help-text">ProTip: Click print and save this as a PDF, even if you do not own a printer!</span>
+                  </div>
+                </h4>
                 <a class="btn btn-info btn-block" id="printqr">PRINT</a>
               </div>
               <div class="form-group">
-                <h4>Download JSON file (encrypted): <br /> <small> You will need to use the password you used to generate your wallet to unencrypt this file. </small></h4>
+                <h4>
+                  Download JSON file (encrypted):
+                  <div class="account-help-icon">
+                    <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                    <span class="account-help-text">The JSON file is just a different way of storing your private key. You will need your password to decrypt this JSON file.</span>
+                  </div>
+                </h4>
                 <a class="btn btn-info btn-block" id="encdownload"> DOWNLOAD </a>
               </div>
               <div class="form-group">
-                <h4>Download JSON file (unencrypted):</h4>
+                <h4>
+                  Download JSON file (unencrypted):
+                  <div class="account-help-icon">
+                    <svg version="1.1" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" style="enable-background:new 0 0 92 92;" xml:space="preserve"><path fill="#2bb2dd" d="M45.386,0.004C19.983,0.344-0.333,21.215,0.005,46.619c0.34,25.393,21.209,45.715,46.611,45.377 c25.398-0.342,45.718-21.213,45.38-46.615C91.656,19.986,70.786-0.335,45.386,0.004z M45.25,74l-0.254-0.004 c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937 C51.904,71.346,49.123,74,45.25,74z M61.705,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938 c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.43l0.031-0.907 c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936 c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993 c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.936l0.02-0.477 c0.285-6.769,2.701-11.643,7.178-14.487C37.947,18.918,41.447,18,45.531,18c5.346,0,9.859,1.299,13.412,3.861 c3.6,2.596,5.426,6.484,5.426,11.556C64.369,36.254,63.473,38.919,61.705,41.341z"/></svg>
+                    <span class="account-help-text">The JSON file is just a different way of storing your private key. You do not need your password to decrypt this JSON file.</span>
+                  </div>
+                </h4>
                 <a class="btn btn-info btn-block" id="unencdownload">DOWNLOAD</a>
               </div>
               <br />
@@ -225,8 +249,6 @@
 
       </div>
       <!-- End Your Wallets -->
-
-
 
 
       <!-- Add Wallet -->
@@ -254,9 +276,7 @@
               <h4>Select your wallet file : </h4>
               <div class="form-group">
                 <p id="file-text"></p>
-                <a class="file-input btn btn-block btn-default btn-file marg-v-sm" id="fileUpload">
-                SELECT WALLET FILE... <input type="file">
-              </a>
+                <a class="file-input btn btn-block btn-default btn-file marg-v-sm" id="fileUpload">SELECT WALLET FILE... <input type="file"></a>
                 <div id="fuploadStatus"></div>
               </div>
               <div class="form-group" id="walletPasdiv" style="display: none;">
@@ -331,7 +351,7 @@
             </div>
             <div class="form-group col-xs-12" id="pindiv" style="display: none;">
               <label> Create a Password for Your Wallet: </label>
-                <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
+              <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
               <input class="form-control" type="text" placeholder="Password" id="decryptwalletpin" />
             </div>
             <div class="form-group col-xs-12">
@@ -342,7 +362,6 @@
         </section>
       </div>
       <!-- /Add Wallet -->
-
 
 
       <!-- send transaction -->
@@ -465,9 +484,6 @@
       <!-- /send transaction -->
 
 
-
-
-
       <!-- print -->
       <div class="tab-pane" id="panePrint" style="display: none;">
         <div class="print-container">
@@ -505,9 +521,6 @@
       <!-- /print -->
 
 
-
-
-
       <!-- help -->
       <div class="tab-pane" id="paneHelp" style="display: none;">
         <h2> Help </h2>
@@ -536,39 +549,44 @@
         </ul>
         <p>It essentially takes MyEtherWallet.com, takes away the need for you to upload your wallet file and enter your password everytime you want to move your Ether, and still keeps your private keys and information with you.</p>
 
+
         <h3> How do I Add an Existing Wallet on MyEtherWallet CX?</h3>
         <ol>
           <li> Go to the "Add New Wallet Tab". </li>
           <li> Click "Upload your wallet file (Presale/Geth/etherwallet)." -or- "Paste / type your private key (Encrypted/Unencrypted)." </li>
           <li> Select your wallet file (JSON) or type/paste your private key.</li>
           <li> If prompted, enter the password you created when you created that wallet.</li>
-          <li> Click "DECRYPT"</li>
+          <li> Click "DECRYPT". </li>
           <li> The wallet's information will display.</li>
-          <li> Enter a "nickname" for you wallet. This is just so you can recognize and differentiate between your wallets more easily.</li>
-          <li> If prompted, (if you uploaded an unencrypted private key) enter a password for your wallet. The password encrypts the private key for this wallet within the Chrome Extension. <strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</li>
+          <li> Enter a "nickname" for you wallet. This is so you can recognize and differentiate between your wallets more easily.</li>
+          <li> If you uploaded an unencrypted private key, enter a password for your wallet. The password encrypts the private key for this wallet within the Chrome Extension. <strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</li>
           <li> Click the "ADD WALLET" button.</li>
           <li> Your wallet has been successfully added. You can now go to the "Wallets" tab in order to see all your wallets, edit the nickname, view the details (private keys, JSON files, QR codes, etc), and remove the wallet.</li>
-          <li> Note: just because you have saved your wallet here, it does not mean you should lose your private key, password, etc. Keep all that information safe, perferably on your computer <strong>and</strong> somewhere besides your computer.</li>
+          <li> Note: just because you have saved your wallet here, it does not mean you should lose your private key, password, etc. Keep all that information safe, preferably on your computer <strong>and</strong> somewhere besides your computer.</li>
         </ol>
 
         <h3> How do I Create a New Wallet on MyEtherWallet CX?</h3>
         <ol>
           <li> Go to the "Add New Wallet Tab". </li>
           <li> Click "Generate New Wallet". </li>
-          <li> Enter a password for your wallet. The password encrypts the private key for this wallet within the Chrome Extension. <strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</li>
-          <li> Enter a "nickname" for you wallet. This is just so you can recognize and differentiate between your wallets more easily. Please, do not use a nickname similar to the password for you wallet.</li>
+          <li> Enter a password for your wallet. The password encrypts the private key for this wallet within the Chrome Extension. <strong>Keep this very safe.</strong> We recommend using a very strong password. You will need this password to send transactions and view your wallet details.</li>
+          <li> Enter a "nickname" for you wallet. This is so you can recognize and differentiate between your wallets more easily. Please, do not use a nickname similar to the password for you wallet.</li>
           <li> Click the "GENERATE" button.</li>
           <li> Your wallet has been successfully added. You can now go to the "Wallets" tab in order to see all your wallets, edit the nickname, view the details (private keys, JSON files, QR codes, etc), and remove the wallet.</li>
-          <li> Don't stop reading now! First&mdash;BACK UP YOUR WALLET EXTERNALLY! (See below).</li>
+          <li> Don't stop reading now! First&mdash;back up your wallet externally. See below.</li>
         </ol>
 
         <h3> How do I save/backup my wallet externally?</h3>
-        <p> You should always back up your wallet externally - like on a flash drive, in cloud storage (Dropbox, etc), and/or a piece of paper. You can view your wallets information at any time by going to to the "Wallets" tab and clicking "View Wallet Details".</p>
+        <p> You should always back up your wallet externally - like on a flash drive, in cloud storage (Dropbox, etc), and/or a piece of paper. You can view your wallets information to save at any time by going to to the "Wallets" tab and clicking "View Wallet Details".</p>
         <ol>
-          <li>Save the address (you may know this as your public key). You can keep it to yourself or share it with others. That way, others can transfer ether to you. They can't take your money with the address.</li>
-          <li>Save the private key. Do not show it to anyone else. Your private key is not needed to receive ether, only to withdraw or generate transactions.</li>
-          <li>If you download the encrypted Private Key or encrypted JSON file, you will need the password you chose upon creating the wallet to decrypt it. So make sure to save the unencrypted versions of the file or save the password along with the encrypted versions.</li>
-          <li>Seriously, be sure to save the private key and/or JSON file. Use our print functionality. Save it! It is required the day you want to withdraw ether. <strong>Forget it, and the ether on the address are lost forever.</strong></li>
+          <li>Save the password in a text document.</li>
+          <li>Save the address in that text document.</li>
+          <li>Save the private key in that text document.</li>
+          <li> Place all this information in a folder, along with your JSON file, PDF version of your paper wallet, and whatever other information you would like to keep.</li>
+          <li> Take this folder and place it on a USB drive. Store this USB drive in a place securely, in a separate location from your computer. Maybe that place is at your office (don't forget it when you're rich off Ether & ragequit!), at your parent's or another family member's house, in a storage locker, etc.</li>
+          <li> Print the wallet if you have a printer. Otherwise, write down on a piece of paper your: password, address, and private key (unencrypted). Again, store this as a secure location, separate from your computer and the USB drive.</li>
+          <li> Now, if your house burns down you still have a USB drive and a piece of paper. If your HDD crashes, you still have a USB drive and a piece of paper.</li>
+
           <li> Note: the encrypted private key / JSON file is encrypted using the password you used when you created the wallet. If you uploaded an encrypted private key, the password you used to decrypt the private key is used to encrypt these items.</li>
           <li> Note: the JSON file is simply a different way of storing your private key / information.</li>
           <li> Last note: MyEtherWallet can decrypt geth / pre-sale wallets, but geth <strong> cannot </strong> decrypt wallets encrypted by MyEtherWallet. We allow you to save both the encrypted and decrypted private keys / JSON files on MyEtherWallet. If you plan on not touching a wallet created on MyEtherWallet for a long, long time it may be prudent to save the unencrypted private key / JSON file so you can access it via geth, the official Ethereum GUI wallet, or whatever else is around in the distant future.</li>
@@ -699,18 +717,18 @@
       <!-- /help -->
 
 
-    <div class="tab-pane" id="paneContact" style="display: none;">
-      <h2> Ways to Get in Touch </h2>
-       <a name="contact"></a>
-      <ul>
-        <li><a href="https://twitter.com/myetherwallet" target="_blank"> Follow Us on Twitter </a></li>
-        <li><a href="mailto:myetherwallet@gmail.com" target="_blank"> Email Us </a></li>
-        <li><a href="https://github.com/kvhnuke/etherwallet/issues" target="_blank"> Open a GitHub Issue</a></li>
-        <li><a href="https://www.reddit.com/message/compose/?to=kvhnuke" target="_blank"> Message kvhnuke on Reddit </a></li>
-        <li><a href="https://www.reddit.com/message/compose/?to=insomniasexx" target="_blank"> Message tayvano (she goes by insom over there) on Reddit </a></li>
-        <li><a href="https://hubski.com/user?id=insomniasexx" target="_blank"> Message tayvano (she goes by insom over there, too!) on Hubski </a></li>
-      </ul>
-    </div>
+      <div class="tab-pane" id="paneContact" style="display: none;">
+        <h2> Ways to Get in Touch </h2>
+        <a name="contact"></a>
+        <ul>
+          <li><a href="https://twitter.com/myetherwallet" target="_blank"> Follow Us on Twitter </a></li>
+          <li><a href="mailto:myetherwallet@gmail.com" target="_blank"> Email Us </a></li>
+          <li><a href="https://github.com/kvhnuke/etherwallet/issues" target="_blank"> Open a GitHub Issue</a></li>
+          <li><a href="https://www.reddit.com/message/compose/?to=kvhnuke" target="_blank"> Message kvhnuke on Reddit </a></li>
+          <li><a href="https://www.reddit.com/message/compose/?to=insomniasexx" target="_blank"> Message tayvano (she goes by insom over there) on Reddit </a></li>
+          <li><a href="https://hubski.com/user?id=insomniasexx" target="_blank"> Message tayvano (she goes by insom over there, too!) on Hubski </a></li>
+        </ul>
+      </div>
 
     </div>
     <!-- /tab panes -->
