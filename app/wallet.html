@@ -44,8 +44,9 @@
 
     <div class="tab-content">
 
-      <!-- Your Wallets -->
       <div class="tab-pane active" id="paneWallets">
+
+        <!-- Your Wallets -->
         <h2> Your Wallets </h2>
 
         <table class="table table-striped" id="tblwalletsmain">
@@ -58,6 +59,24 @@
               <th>Edit</th>
               <th>View</th>
               <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+        <br /><br />
+
+        <!-- Watch Only Accounts TODO: only show if they have added watch only accounts-->
+        <h2> Your Watch-Only Accounts </h2>
+
+        <table class="table table-striped" id="">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Wallet Nickname</th>
+              <th>Wallet Address</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>
@@ -148,7 +167,7 @@
 
         <div id="viewWalletDiv" style="display: none;">
           <div class="row" id="">
-            <hr />
+            <br /><hr />
             <div class="col-sm-8">
               <h3><span class="text-light">Viewing Wallet Details For:</span> <span id="walletNickname"> tayvano's wallet </span></h3>
               <p> Please save and back up all your information externally. Check out the help page for instructions on how to do this.</p>
@@ -259,18 +278,23 @@
             <h4> How would you like to access your wallet? </h4>
             <div class="radio">
               <label>
-                <input type="radio" name="typeOfKeyRadio" value="gennewwallet">Generate new wallet.</label>
+                <input type="radio" name="typeOfKeyRadio" value="gennewwallet">Generate New Wallet.</label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="typeOfKeyRadio" value="fileupload">Upload your wallet file (Presale/Geth/etherwallet).</label>
+                <input type="radio" name="typeOfKeyRadio" value="fileupload">Upload Your Wallet File <small>(JSON from presale / geth / MyEtherWallet).</small></label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="typeOfKeyRadio" value="pasteprivkey">Paste / type your private key (Encrypted/Unencrypted).</label>
+                <input type="radio" name="typeOfKeyRadio" value="pasteprivkey">Paste/Type Your Encrypted or Unencrypted Private Key.</label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="typeOfKeyRadio" value="watchOnlyAccount">Add an Account to Watch.</label>
             </div>
           </div>
           <div class="col-md-4 col-sm-6">
+
             <!-- if selected upload -->
             <div id="selectedUploadKey" style="display: none;">
               <h4>Select your wallet file : </h4>
@@ -285,6 +309,7 @@
               </div>
             </div>
             <!-- /if selected upload -->
+
             <!-- if selected type key-->
             <div id="selectedTypeKey" style="display: none;">
               <h4> Paste / type your private key: </h4>
@@ -296,30 +321,47 @@
                 <input class="form-control" type="password" placeholder="Password" id="privkeypassword">
               </div>
             </div>
+
             <!-- if selected type gen new wallet-->
             <div id="selectedGenNewWallet" style="display: none;">
               <div class="form-group col-xs-12">
                 <label> Create a Nickname for Your Wallet: </label>
-                <input class="form-control" type="text" placeholder="my new wallet" id="newWalletNick">
+                <input class="form-control" type="text" placeholder="My New Wallet" id="newWalletNick">
               </div>
               <div class="form-group col-xs-12">
                 <label> Create a Password for Your Wallet: </label>
                 <input class="form-control" type="text" placeholder="Password" id="ethgenpassword">
-                <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
+                <p><strong>We recommend using a very strong password and keeping it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
               </div>
-
             </div>
             <!-- /if selected type gen new wallet-->
+
+            <!-- if selected "watch only account"-->
+            <div id="selectedWatchOnlyAccount" style="display: none;">
+              <p class="col-xs-12 text-danger">You can add any account to "watch" on the wallets tab without uploading a private key. Keep in mind, this does <strong> not </strong> mean you have access to this wallet, nor can you transfer Ether from it. </p>
+              <div class="form-group col-xs-12">
+                <label> Create a Nickname for Your Watch-Only Account: </label>
+                <input class="form-control" type="text" placeholder="My New Wallet" id="">
+              </div>
+              <div class="form-group col-xs-12">
+                <label> Address for your Watch-Only Account: </label>
+                <input class="form-control" type="text" placeholder="0x7cb57b5a97eabe94205c07890be4c1ad31e486a8" id="">
+              </div>
+              <div class="form-group col-xs-12">
+                <a href="" id="" class="btn btn-primary"> Add Watch-Only Account </a>
+              </div>
+            </div>
+            <!-- /if selected "watch only account"-->
 
           </div>
           <div class="col-md-4 col-sm-6" style="display: none;" id="walletuploadbutton">
             <h4 id="uploadbtntxt-wallet" style="display: none;"> Decrypt your wallet</h4>
             <h4 id="uploadbtntxt-privkey" style="display: none;"> Decrypt your private key </h4>
-            <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">DECRYPT</a></div>
+            <div class="form-group"><a class="btn btn-primary btn-block" id="decryptdata">Decrypt</a></div>
             <div id="decryptStatus0"></div>
           </div>
           <div class="col-md-4 col-sm-6" style="display: none;" id="newWalletGenButtonDiv">
-            <h4> Generate new Wallet</h4>
+            <h4> Generate New Wallet</h4>
             <div class="form-group"><a class="btn btn-primary btn-block" id="generateNewWallet">Generate</a></div>
             <div id="generatedWallet"></div>
           </div>
@@ -351,7 +393,7 @@
             </div>
             <div class="form-group col-xs-12" id="pindiv" style="display: none;">
               <label> Create a Password for Your Wallet: </label>
-              <p><strong>We recommend using a very strong password and keep it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
+              <p><strong>We recommend using a very strong password and keeping it safe.</strong> You will need this password to send transactions and view your wallet details.</p>
               <input class="form-control" type="text" placeholder="Password" id="decryptwalletpin" />
             </div>
             <div class="form-group col-xs-12">

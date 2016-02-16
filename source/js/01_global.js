@@ -198,6 +198,7 @@ function bindElements() {
 		$("#decryptStatus").hide();
 		$("#selectedTypeKey").hide();
 		$("#selectedUploadKey").hide();
+		$("#selectedWatchOnlyAccount").hide();
 		$("#selectedGenNewWallet").hide();
 		$("#newWalletGenButtonDiv").hide();
         $("#walletpreview0").hide();
@@ -215,6 +216,8 @@ function bindElements() {
 			$("#selectedGenNewWallet").show();
 			$("#newWalletGenButtonDiv").show();
 			decryptType = "newwallet";
+		} else if (this.value == 'watchOnlyAccount') {
+			$("#selectedWatchOnlyAccount").show();
 		}
 	});
 	$('input[type=radio][name=currencyRadio]').change(function() {
