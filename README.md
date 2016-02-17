@@ -83,3 +83,6 @@ TODO. If you want to get involved, reach out to us.
 - The font in the chrome display is thin, thus the period is not visible. (from reddit thread)
 - Would be nice if on quick send it defaulted to the only wallet you have if you have just one created. (from reddit thread)
 - When generating a new wallet, the password is shown in plaintext instead of dots. I would rather have them shown as dots, perhaps with a optional ticker to show the plaintext. (from reddit thread)
+- Add "bitaddress.org randomizes the private key generation via mouse movements. Myetherwallet doesn't do this. Is the random number generation for this safe? Is Myetherwallet the only or best option?" to FAQ
+- Add "gas limit is too low error" to FAQ
+- Add this to helpful links: Add this in helpful links: https://www.reddit.com/r/ethereum/comments/46887p/tips_for_recovering_your_presale_password/
