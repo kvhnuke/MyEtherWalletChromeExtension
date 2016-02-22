@@ -30,7 +30,8 @@
     font-weight: normal;
   }
   table {
-    margin-bottom: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid @table-border-color;
   }
   .form-group {
     margin-bottom: .5em;
@@ -55,4 +56,14 @@ fieldset[disabled] .btn {
     color: white;
     text-decoration: underline;
   }
+}
+
+/* uncss:ignore */
+.quicksend-address {
+  font-family: @font-family-monospace;
+  max-width: 170px;
+  word-wrap: break-word;
+  max-width: 190px;
+  font-size: 12px;
+  margin-left: 20px;
 }

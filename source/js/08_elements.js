@@ -27,8 +27,8 @@ function getAccountInfoRow(rid,address, nick){
 function getQuickSendRow(rid,address, nick){
     var str = "<tr>\
         <td>\
-        <div style='display:none;' id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
-          <label><label><input type=\"radio\" name=\"selectedWallet\" value=\""+address+"\">"+nick+"</label>\
+          <label><label><input type=\"radio\" name=\"selectedWallet\" value=\""+address+"\"><strong>"+nick+"</strong></label>\
+          <div class=\"quicksend-address\" id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
         </td>\
         <td id='accountBalancePopMB-"+rid+"'></td>\
       </tr>";

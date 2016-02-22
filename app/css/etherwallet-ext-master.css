@@ -5617,7 +5617,8 @@ input[type=radio] {
   font-weight: normal;
 }
 #etherWalletPopUp table {
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dddddd;
 }
 #etherWalletPopUp .form-group {
   margin-bottom: .5em;
@@ -5641,6 +5642,15 @@ fieldset[disabled] .btn {
 .announcement-warning a {
   color: white;
   text-decoration: underline;
+}
+/* uncss:ignore */
+.quicksend-address {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  max-width: 170px;
+  word-wrap: break-word;
+  max-width: 190px;
+  font-size: 12px;
+  margin-left: 20px;
 }
 /* Custom Utilities */
 .text-navy {
