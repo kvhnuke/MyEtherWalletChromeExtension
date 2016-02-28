@@ -2,7 +2,7 @@ var fs = require('fs');
 // less
 var gulp = require('gulp');
 var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
+var cssnano = require('gulp-cssnano');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var uncss = require('gulp-uncss');
@@ -31,10 +31,6 @@ var jsOutputFolder = '../app/js';
 var jsOutputFile = 'etherwallet-ext-master.min.js';
 var staticjsOutputFile = 'etherwallet-ext-static.min.js';
 
-// html Pages
-// var htmlPages = "./pages/*.html";
-// var tplFiles = "./tpl/*.tpl";
-
 gulp.task('less', function (cb) {
   return gulp
     .src(lessFile)
@@ -51,7 +47,9 @@ gulp.task('less', function (cb) {
           '../app/wallet.html'
         ]
       }))
-      .pipe(minifyCSS({keepBreaks: false}))
+      .pipe(cssnano()).on('error', notify.onError(function (error) {
+        return "ERROR! minify CSS Problem file : " + error.message;
+      }))
       .pipe(rename(lessOutputFileMin))
       .pipe(gulp.dest(lessOutputFolder))
       .pipe(notify('Less Compiled, UnCSSd and Minified'));
@@ -61,7 +59,6 @@ gulp.task('minJS', function () {
   return gulp
     .src(jsFiles)
       .pipe(gulpConcat(jsOutputFile))
-      .pipe(uglify())
       .pipe(gulp.dest(jsOutputFolder))
      .pipe(notify('JS Concat and Uglified'));
 });
@@ -70,21 +67,10 @@ gulp.task('staticJS', function () {
   return gulp
     .src(staticjsFiles)
       .pipe(gulpConcat(staticjsOutputFile))
-      .pipe(uglify())
       .pipe(gulp.dest(jsOutputFolder))
      .pipe(notify('staic JS Concat and Uglified'));
 });
 
-/*
-gulp.task('genHTMLPages', function () {
-    var header=fs.readFileSync("./tpl/header.tpl", "utf8");
-    var footer=fs.readFileSync("./tpl/footer.tpl", "utf8");
-    return gulp.src(htmlPages)
-        .pipe(template({header: header, footer: footer}))
-        .pipe(gulp.dest('./'))
-        .pipe(notify('HTML Pages generated'));
-});
-*/
 
 gulp.task('watchJS', function() {
     gulp.watch(jsWatchFolder,['minJS']);
@@ -96,13 +82,5 @@ gulp.task('watchHTML', function() {
     gulp.watch(htmlWatchFolder, ['less']);
 });
 
-/*
-gulp.task('watchPAGES', function() {
-    gulp.watch(htmlPages, ['genHTMLPages','less-uncss']);
-});
-gulp.task('watchTPL', function() {
-    gulp.watch(tplFiles, ['genHTMLPages','less-uncss']);
-});
-*/
 
 gulp.task('default', ['minJS' , 'staticJS', 'less', 'watchJS' , 'watchLess', 'watchHTML']);
