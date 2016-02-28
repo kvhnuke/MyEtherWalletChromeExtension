@@ -504,11 +504,10 @@ function addEditEvents() {
 	});
 	$(".WatchOnlyWalletDelete").unbind().click(function() {
 		var deleteVal = $(this).attr('deleteVal');
-		var nickname = $("#accountNickWatchOnly-" + deleteVal).html();
 		var walAddress = $("#accountAddressWatchOnly-" + deleteVal).html();
-		$("#walletNicknameDelete").html(nickname);
-		$('#deleteWalletAddress').val(walAddress);
-		$("#removeWallet").modal("show");
+		deleteAccount(walAddress, function() {
+			reloadMainPageWallets();
+		});
 	});
 	$(".mainWalletView").unbind().click(function() {
 		var viewVal = $(this).attr('viewVal');
