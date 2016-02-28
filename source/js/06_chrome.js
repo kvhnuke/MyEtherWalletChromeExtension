@@ -33,16 +33,24 @@ function addWalletToStorage(address, encprivkey, nickname, callback){
     obj[keyname] = JSON.stringify(value);
     storage.set(obj,callback);
 }
+function addWatchOnlyAddress(address, nickname, callback){
+    nickname = nickname.replace(/(<([^>]+)>)/ig,"");
+    var value = {nick:nickname, type:'watchOnly'};
+    var keyname = address;
+    var obj= {};
+    obj[keyname] = JSON.stringify(value);
+    storage.set(obj,callback);
+}
 function getWalletFromStorage(address, callback){
     storage.get(address,callback);
 }
-function getWalletsArr(callback){
+function getStorageArr(filter, callback){
     var wallets = [];
     storage.get(null, function(items) {
         for (var key in items) {
             if (items.hasOwnProperty(key)) {
                 var tobj = JSON.parse(items[key]);
-                 if(tobj.type=='wallet'){
+                 if(tobj.type==filter){
                     tobj['addr']=key;
                     wallets.push(tobj);
                  }
@@ -51,6 +59,12 @@ function getWalletsArr(callback){
         wallets.sort(sortByNickName);
         callback(wallets);
     });
+}
+function getWalletsArr(callback){
+    getStorageArr('wallet',callback);
+}
+function getWatchOnlyArr(callback){
+   getStorageArr('watchOnly',callback);
 }
 function deleteAccount(address,callback){
     storage.remove(address,function(){

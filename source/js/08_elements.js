@@ -14,6 +14,20 @@ function getMainPageWalletRow(rid, nick,address){
             </tr>";
     return str;
 }
+function getMainPageWatchOnlyRow(rid, nick,address){
+    var str = "<tr>\
+              <td>"+rid+"</td>\
+              <td id=\"accountNickWatchOnly-"+rid+"\">"+nick+"</td>\
+              <td id=\"accountAddressWatchOnly-"+rid+"\">"+address+"</td>\
+              <td>\
+                <strong class=\"text-success\" id=\"accountBalanceWatchOnly-"+rid+"\"></strong>\
+                <br />\
+                <small><span id=\"accountBalanceBtcWatchOnly-"+rid+"\"></span> &nbsp;&nbsp; <span id=\"accountBalanceUsdWatchOnly-"+rid+"\"></span> &nbsp;&nbsp; <span id=\"accountBalanceEurWatchOnly-"+rid+"\"></span></small>\
+              </td>\
+              <td> <a deleteVal='"+rid+"' class='WatchOnlyWalletDelete text-danger'> Remove </a></td>\
+            </tr>";
+    return str;
+}
 function getAccountInfoRow(rid,address, nick){
     var str = "<tr>\
         <td>\

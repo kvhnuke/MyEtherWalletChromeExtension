@@ -2,18 +2,19 @@ var PrivKey = "";
 var decryptType = "";
 var SavedNickNames = [];
 var SavedAccounts = [];
-var usdval;
-var eurval;
-var btcval;
+var usdval = 0;
+var eurval = 0;
+var btcval = 0;
+var numBalanceReq = 0
 $(document).ready(function() {
 	bindElements();
 	checkAndLoadPageHash();
 });
 $(window).load(function() {
-    $('html,body').scrollTop(0);
-    setTimeout(function() {
-        $('html,body').scrollTop(0);
-    }, 1);
+	$('html,body').scrollTop(0);
+	setTimeout(function() {
+		$('html,body').scrollTop(0);
+	}, 1);
 });
 function checkAndLoadPageHash() {
 	if (window.location.hash) {
@@ -27,7 +28,7 @@ function checkAndLoadPageHash() {
 }
 
 function paneNavigate(showEleId, activeEleId) {
-    location.hash = activeEleId;
+	location.hash = activeEleId;
 	hideAllMainContainers();
 	$("#" + showEleId).show();
 	$("#" + activeEleId).parent().addClass('active');
@@ -38,7 +39,7 @@ function paneNavigate(showEleId, activeEleId) {
 function onTabOpen(tabid) {
 	if (tabid == 'add-wallet') {
 		setNickNames();
-        setAccounts();
+		setAccounts();
 	} else if (tabid == 'wallets') {
 		reloadMainPageWallets();
 	} else if (tabid == 'send-transaction') {
@@ -49,9 +50,9 @@ function onTabOpen(tabid) {
 function bindElements() {
 	$(".ptabs").each(function(index) {
 		$(this).click(function() {
-		  location.hash = this.id;
-          location.reload();
-		//	paneNavigate($(this).attr('showId'), this.id);
+			location.hash = this.id;
+			location.reload();
+			//	paneNavigate($(this).attr('showId'), this.id);
 		});
 	});
 	$("#btndonate").click(function() {
@@ -80,20 +81,20 @@ function bindElements() {
 			$("#editWallet").modal("hide");
 		});
 	});
-    $("#hideWalletDetails").click(function(){
-        $("#walletNickname").html('');
-        $("#address").val('');
-        $("#privkey").val('');
-        $("#privkeyenc").val('');
-	    $("#qrcodeAdd").empty();
-        $("#viewWalletDiv").hide();
-	    $("#qrcodeAdd").empty();
-        $("#qrcode").empty();
-        $("#encdownload").attr('href', '');
-        $("#encdownload").attr('download', '');
-        $("#unencdownload").attr('href', '');
-	    $("#unencdownload").attr('download', '');
-    });
+	$("#hideWalletDetails").click(function() {
+		$("#walletNickname").html('');
+		$("#address").val('');
+		$("#privkey").val('');
+		$("#privkeyenc").val('');
+		$("#qrcodeAdd").empty();
+		$("#viewWalletDiv").hide();
+		$("#qrcodeAdd").empty();
+		$("#qrcode").empty();
+		$("#encdownload").attr('href', '');
+		$("#encdownload").attr('download', '');
+		$("#unencdownload").attr('href', '');
+		$("#unencdownload").attr('download', '');
+	});
 	$("#btnapproveView").click(function() {
 		var ethAccAddress = $("#viewWalletAddress").val();
 		var pin = $("#viewWalletPin").val();
@@ -114,7 +115,11 @@ function bindElements() {
 						$("#qrcodeAdd").empty();
 						$("#viewWalletDiv").show();
 						$("#qrcodeAdd").empty();
-                        $('#addressIdenticon').css("background-image", 'url(' + blockies.create({ seed:ethAccAddress ,size: 8,scale: 16}).toDataURL()+')');
+						$('#addressIdenticon').css("background-image", 'url(' + blockies.create({
+							seed: ethAccAddress,
+							size: 8,
+							scale: 16
+						}).toDataURL() + ')');
 						new QRCode($("#qrcodeAdd")[0], {
 							text: ethAccAddress,
 							width: $("#qrcode").width(),
@@ -133,10 +138,22 @@ function bindElements() {
 							correctLevel: QRCode.CorrectLevel.H
 						});
 						var fileType = "text/json;charset=UTF-8";
-						var encblob = new Blob([JSON.stringify({address:ethAccAddress,encrypted:true,locked:true,private:encPriv,hash:ethAccAddress})], {
+						var encblob = new Blob([JSON.stringify({
+							address: ethAccAddress,
+							encrypted: true,
+							locked: true,
+							private: encPriv,
+							hash: ethAccAddress
+						})], {
 							type: fileType
 						});
-						var unencblob = new Blob([JSON.stringify({address:ethAccAddress,encrypted:true,locked:false,private:pkey,hash:ethAccAddress})], {
+						var unencblob = new Blob([JSON.stringify({
+							address: ethAccAddress,
+							encrypted: true,
+							locked: false,
+							private: pkey,
+							hash: ethAccAddress
+						})], {
 							type: fileType
 						});
 						$("#encdownload").attr('href', window.URL.createObjectURL(encblob));
@@ -166,7 +183,7 @@ function bindElements() {
 			$('input[type=radio][name=currencyRadio][value=ether]').prop("checked", true);
 			$('#sendtxamount').trigger("keyup");
 		}, function(err) {
-			$("#txcreatestatus").html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
+			$("#txcreatestatus").html(getErrorText(err)).fadeIn(50).fadeOut(3000);
 		});
 	});
 	$("#decryptdata").click(function() {
@@ -183,6 +200,9 @@ function bindElements() {
 	});
 	$("#generateNewWallet").click(function() {
 		generateSingleWallet();
+	});
+	$("#addWatchOnly").click(function() {
+		addWatchOnlyAccount();
 	});
 	$('input[type=radio][name=typeOfKeyRadio]').change(function() {
 		PrivKey = "";
@@ -201,11 +221,13 @@ function bindElements() {
 		$("#selectedWatchOnlyAccount").hide();
 		$("#selectedGenNewWallet").hide();
 		$("#newWalletGenButtonDiv").hide();
-        $("#walletpreview0").hide();
-        $("#decryptwalletpin").val('');
-        $("#decryptwalletnickname").val('');
+		$("#walletpreview0").hide();
+		$("#decryptwalletpin").val('');
+		$("#decryptwalletnickname").val('');
 		$("#ethgenpassword").val('');
 		$("#newWalletNick").val('');
+		$("#watchOnlyNick").val('');
+		$("#watchOnlyAdd").val('');
 		if (this.value == 'fileupload') {
 			$("#selectedUploadKey").show();
 			decryptType = "fupload";
@@ -238,18 +260,27 @@ function bindElements() {
 			var etherUnit = $('input[type=radio][name=currencyRadio]:checked').val();
 			$("#weiamount").html('<p class="text-success"><strong>' + toWei(amount, etherUnit) + ' wei ( approximately ' + toFiat(amount, etherUnit, usdval) + ' USD/' + toFiat(amount, etherUnit, eurval) + ' EUR )</strong></p>');
 		} else if ($('#sendtxamount').val() != "" && !$.isNumeric(amount)) {
-			$("#weiamount").html('<p class="text-danger"><strong>Invalid amount</strong></p>');
+			$("#weiamount").html(getErrorText('Invalid Amount'));
 		} else {
 			$("#weiamount").html('');
 		}
 	});
+	$('#watchOnlyAdd').on('paste, keyup', function() {
+		if (validateEtherAddress($('#watchOnlyAdd').val())) {
+			$("#WatchOnlyAddressValidate").html(getSuccessText('Address is valid')).fadeIn(50);
+		} else if ($('#watchOnlyAdd').val() == "") {
+			$("#WatchOnlyAddressValidate").html('');
+		} else {
+			$("#WatchOnlyAddressValidate").html(getErrorText('Invalid address')).fadeIn(50);
+		}
+	});
 	$('#sendtxaddress').on('paste, keyup', function() {
 		if (validateEtherAddress($('#sendtxaddress').val())) {
-			$("#addressvalidate").html('<p class="text-success"><strong> Address is valid</strong></p>').fadeIn(50);
+			$("#addressvalidate").html(getSuccessText('Address is valid')).fadeIn(50);
 		} else if ($('#sendtxaddress').val() == "") {
 			$("#addressvalidate").html('');
 		} else {
-			$("#addressvalidate").html('<p class="text-danger"><strong> Invalid address</strong></p>').fadeIn(50);
+			$("#addressvalidate").html(getErrorText('Invalid address')).fadeIn(50);
 		}
 	});
 	$('#privkeypassword').on('paste, keyup', function() {
@@ -303,7 +334,7 @@ function bindElements() {
 					$("#uploadbtntxt-privkey").hide();
 				}
 			} catch (err) {
-				$('#fuploadStatus').append('<p class="text-center text-danger"><strong> ' + err + '</strong></p>');
+				$('#fuploadStatus').append(getErrorText(err));
 			}
 		};
 		fr.readAsText(file);
@@ -313,10 +344,35 @@ function bindElements() {
 			input.val(log);
 		} else {
 			if (log) {
-				$('#fuploadStatus').append('<p class="text-center text-success"><strong> File Selected: ' + log + '</strong></p>');
+				$('#fuploadStatus').append(getSuccessText('File Selected: ' + log));
 			}
 		}
 	});
+}
+
+function addWatchOnlyAccount() {
+	var wNick = $("#watchOnlyNick").val();
+	var wAdd = $("#watchOnlyAdd").val();
+	if (!validateEtherAddress(wAdd) || wAdd == "") {
+		$("#watchOnlyWalletStatus").html(getErrorText("Invalid Address")).fadeIn(50).fadeOut(3000);
+	} else if (wNick == "") {
+		$("#watchOnlyWalletStatus").html(getErrorText("Invalid valid nick name")).fadeIn(50).fadeOut(3000);
+	} else if ($.inArray(wNick, SavedNickNames) > -1) {
+		$("#watchOnlyWalletStatus").html(getErrorText("Nick name already in use")).fadeIn(50).fadeOut(3000);
+	} else {
+		addWatchOnlyAddress(wAdd, wNick, function() {
+			if (chrome.runtime.lastError) {
+				$("#watchOnlyWalletStatus").html(getErrorText(chrome.runtime.lastError.message)).fadeIn(50).fadeOut(3000);
+			} else {
+				$("#watchOnlyWalletStatus").html(getSuccessText("New watch only address added, " + wNick + ":" + wAdd)).fadeIn(50).fadeOut(5000, function() {
+					$("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked", true);
+					$('input[type=radio][name=typeOfKeyRadio]').change();
+					$('*[showid="paneWallets"]').click();
+				});
+				setNickNames();
+			}
+		});
+	}
 }
 
 function setNickNames() {
@@ -324,17 +380,19 @@ function setNickNames() {
 		SavedNickNames = data;
 	});
 }
-function setAccounts(){
-    getAllAccounts(function(data) {
+
+function setAccounts() {
+	getAllAccounts(function(data) {
 		SavedAccounts = data;
 	});
 }
+
 function preSendTransaction() {
 	sendTransaction($("#tasignedtx").val(), function(data) {
-		$("#txsendstatus").html('<p class="text-center text-success"><strong> Transaction submitted. TX ID: ' + data + '</strong></p>');
+		$("#txsendstatus").html(getSuccessText('Transaction submitted. TX ID: ' + data));
 		setWalletBalance(1);
 	}, function(err) {
-		$("#txsendstatus").html('<p class="text-center text-danger"><strong>' + err + '</strong></p>');
+		$("#txsendstatus").html(getErrorText(err));
 	});
 	$('#sendTransaction').modal('hide');
 }
@@ -346,7 +404,7 @@ function preCreateTransaction() {
 		$("#txsendstatus").html('')
 		var toAddress = $('#sendtxaddress').val();
 		if (PrivKey.length != 64) throw "Invalid Private key, try again";
-        if (formatAddress(strPrivateKeyToAddress(PrivKey),'hex')==toAddress) throw "You cannot send ether to yourself";
+		if (formatAddress(strPrivateKeyToAddress(PrivKey), 'hex') == toAddress) throw "You cannot send ether to yourself";
 		if (!validateEtherAddress(toAddress)) throw "Invalid to Address, try again";
 		if (!$.isNumeric($('#sendtxamount').val()) || $('#sendtxamount').val() <= 0) throw "Invalid amount, try again";
 		var etherUnit = $('input[type=radio][name=currencyRadio]:checked').val();
@@ -354,19 +412,19 @@ function preCreateTransaction() {
 		createTransaction(PrivKey, toAddress, weiAmount, function(data) {
 			$("#tarawtx").val(data.raw);
 			$("#tasignedtx").val(data.signed);
-			$("#txcreatestatus").html('<p class="text-center text-success"><strong> Transaction generated</strong></p>').fadeIn(50);
+			$("#txcreatestatus").html(getSuccessText('Transaction generated')).fadeIn(50);
 			$("#divtransactionTAs").show();
 			$("#divsendtranaction").show();
 			$("#confirmAmount").html($('#sendtxamount').val());
 			$("#confirmCurrancy").html(etherUnit);
 			$("#confirmAddress").html(toAddress);
 		}, function(err) {
-			$("#txcreatestatus").html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
+			$("#txcreatestatus").html(getErrorText(err)).fadeIn(50).fadeOut(3000);
 			$("#divtransactionTAs").hide();
 			$("#divsendtranaction").hide();
 		});
 	} catch (err) {
-		$("#txcreatestatus").html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
+		$("#txcreatestatus").html(getErrorText(err)).fadeIn(50).fadeOut(3000);
 		$("#divtransactionTAs").hide();
 		$("#divsendtranaction").hide();
 	}
@@ -393,6 +451,7 @@ function setSendTransactionWallets() {
 }
 
 function reloadMainPageWallets() {
+    numBalanceReq = 0;
 	getWalletsArr(function(wallets) {
 		$("#tblwalletsmain > tbody").empty();
 		for (var i = 0; i < wallets.length; i++) {
@@ -400,6 +459,18 @@ function reloadMainPageWallets() {
 			var tblRow = getMainPageWalletRow(i + 1, cobj.nick, cobj.addr);
 			$("#tblwalletsmain > tbody").append(tblRow);
 			setWalletBalance('MainTbl-' + (i + 1));
+		}
+		addEditEvents();
+	});
+	getWatchOnlyArr(function(wallets) {
+		$("#tblWatchOnlyMain > tbody").empty();
+		if (wallets.length == 0) $("#secWatchOnlyMain").hide();
+		else $("#secWatchOnlyMain").show();
+		for (var i = 0; i < wallets.length; i++) {
+			var cobj = wallets[i];
+			var tblRow = getMainPageWatchOnlyRow(i + 1, cobj.nick, cobj.addr);
+			$("#tblWatchOnlyMain > tbody").append(tblRow);
+			setWalletBalance('WatchOnly-' + (i + 1));
 		}
 		addEditEvents();
 	});
@@ -431,6 +502,14 @@ function addEditEvents() {
 		$('#deleteWalletAddress').val(walAddress);
 		$("#removeWallet").modal("show");
 	});
+	$(".WatchOnlyWalletDelete").unbind().click(function() {
+		var deleteVal = $(this).attr('deleteVal');
+		var nickname = $("#accountNickWatchOnly-" + deleteVal).html();
+		var walAddress = $("#accountAddressWatchOnly-" + deleteVal).html();
+		$("#walletNicknameDelete").html(nickname);
+		$('#deleteWalletAddress').val(walAddress);
+		$("#removeWallet").modal("show");
+	});
 	$(".mainWalletView").unbind().click(function() {
 		var viewVal = $(this).attr('viewVal');
 		var nickname = $("#accountNickMainTbl-" + viewVal).html();
@@ -442,30 +521,50 @@ function addEditEvents() {
 }
 
 function setWalletBalance(id) {
-	getBalance($("#accountAddress" + id).html(), function(result) {
+    setTimeout(function(){
+            getBalanceRequest(id)
+        },numBalanceReq*300);
+    numBalanceReq++;
+}
+function getBalanceRequest(id){
+    getBalance($("#accountAddress" + id).html(), function(result) {
 		if (!result.error) {
 			var bestCurAmount = getBestEtherKnownUnit(result.data.balance);
 			$("#accountBalance" + id).html(bestCurAmount.amount + " " + bestCurAmount.unit);
-			getETHvalue('USD', function(value) {
-				usdval = value;
-				tusdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+			if (usdval == 0) {
+				getETHvalue('USD', function(value) {
+					usdval = value;
+					tusdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+					$("#accountBalanceUsd" + id).html(formatCurrency(parseFloat(tusdval), '$') + " USD");
+				});
+			} else {
+				tusdval = toFiat(bestCurAmount.amount, bestCurAmount.unit, usdval);
 				$("#accountBalanceUsd" + id).html(formatCurrency(parseFloat(tusdval), '$') + " USD");
-			});
-			getETHvalue('EUR', function(value) {
-				eurval = value;
-				teurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+			}
+			if (eurval == 0) {
+				getETHvalue('EUR', function(value) {
+					eurval = value;
+					teurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+					$("#accountBalanceEur" + id).html(formatCurrency(parseFloat(teurval), '&euro;') + " EUR");
+				});
+			} else {
+				teurval = toFiat(bestCurAmount.amount, bestCurAmount.unit, eurval);
 				$("#accountBalanceEur" + id).html(formatCurrency(parseFloat(teurval), '&euro;') + " EUR");
-			});
-			getETHvalue('BTC', function(value) {
-				btcval = value;
-				tbtcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+			}
+			if (btcval == 0) {
+				getETHvalue('BTC', function(value) {
+					btcval = value;
+					tbtcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, value);
+					$("#accountBalanceBtc" + id).html(tbtcval + " BTC");
+				});
+			} else {
+				tbtcval = toFiat(bestCurAmount.amount, bestCurAmount.unit, btcval);
 				$("#accountBalanceBtc" + id).html(tbtcval + " BTC");
-			});
+			}
 		} else
 		alert(result.msg);
 	});
 }
-
 function formatCurrency(n, currency) {
 	return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
 }
@@ -473,12 +572,12 @@ function formatCurrency(n, currency) {
 function walletDecryptSuccess(id) {
 	$("#accountAddress" + id).html(formatAddress(strPrivateKeyToAddress(PrivKey), 'hex'));
 	setWalletBalance(id);
-	$("#decryptStatus" + id).html('<p class="text-center text-success"><strong> Wallet successfully decrypted</strong></p>').fadeIn(2000).fadeOut(5000);
+	$("#decryptStatus" + id).html(getSuccessText('Wallet successfully decrypted')).fadeIn(2000).fadeOut(5000);
 	$("#walletpreview" + id).show();
 }
 
 function walletDecryptFailed(id, err) {
-	$("#decryptStatus" + id).html('<p class="text-center text-danger"><strong> ' + err + '</strong></p>').fadeIn(50).fadeOut(3000);
+	$("#decryptStatus" + id).html(getErrorText(err)).fadeIn(50).fadeOut(3000);
 	$("#walletpreview" + id).hide();
 }
 
@@ -495,24 +594,24 @@ function addDecryptedWallet() {
 		$("#AddDecryptedWalletStatus").html(getErrorText("Nickname is in use, please select different nickname")).fadeIn(50).fadeOut(3000);
 	} else if (PrivKey == "" || PrivKey.length != 64) {
 		$("#AddDecryptedWalletStatus").html(getErrorText("Invalid Private key try to decrypt the wallet again")).fadeIn(50).fadeOut(3000);
-	} else if (password==nickname) {
+	} else if (password == nickname) {
 		$("#generatedWallet").html(getErrorText("Password cannot be same as the the nickname")).fadeIn(50).fadeOut(3000);
 	} else {
 		var address = formatAddress(strPrivateKeyToAddress(PrivKey), 'hex');
-        if ($.inArray(address, SavedAccounts) > -1) {
-		  $("#AddDecryptedWalletStatus").html(getErrorText("Account already exists")).fadeIn(50).fadeOut(3000);
-          return;
-        }
+		if ($.inArray(address, SavedAccounts) > -1) {
+			$("#AddDecryptedWalletStatus").html(getErrorText("Account already exists")).fadeIn(50).fadeOut(3000);
+			return;
+		}
 		var encprivkey = encryptPrivKey(PrivKey, password);
 		addWalletToStorage(address, encprivkey, nickname, function() {
 			if (chrome.runtime.lastError) {
 				$("#AddDecryptedWalletStatus").html(getErrorText(chrome.runtime.lastError.message)).fadeIn(50).fadeOut(3000);
 			} else {
-				$("#AddDecryptedWalletStatus").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000, function(){
-                    $("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked",true);
-                    $('input[type=radio][name=typeOfKeyRadio]').change();
-				    $('*[showid="paneWallets"]').click();
-                });
+				$("#AddDecryptedWalletStatus").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000, function() {
+					$("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked", true);
+					$('input[type=radio][name=typeOfKeyRadio]').change();
+					$('*[showid="paneWallets"]').click();
+				});
 				setNickNames();
 			}
 		});
@@ -526,12 +625,11 @@ function decryptFormData() {
 		var fr = new FileReader();
 		fr.onload = function() {
 			try {
-                var passVal = $('#walletfilepassword').val();
+				var passVal = $('#walletfilepassword').val();
 				PrivKey = getWalletFilePrivKey(fr.result, passVal);
-                if(passVal=='')
-                    $("#pindiv").show();
-                else
-                    $("#decryptwalletpin").val(passVal);
+				if (passVal == '') $("#pindiv").show();
+				else
+				$("#decryptwalletpin").val(passVal);
 				walletDecryptSuccess(0);
 			} catch (err) {
 				walletDecryptFailed(0, err);
@@ -540,12 +638,11 @@ function decryptFormData() {
 		fr.readAsText(file);
 	} else if (decryptType == 'privkey') {
 		try {
-            var passVal = $('#privkeypassword').val();
+			var passVal = $('#privkeypassword').val();
 			PrivKey = decryptTxtPrivKey($('#manualprivkey').val(), passVal);
-             if(passVal=='')
-                    $("#pindiv").show();
-             else
-                    $("#decryptwalletpin").val(passVal);
+			if (passVal == '') $("#pindiv").show();
+			else
+			$("#decryptwalletpin").val(passVal);
 			walletDecryptSuccess(0);
 		} catch (err) {
 			walletDecryptFailed(0, "Invalid password");
@@ -607,7 +704,7 @@ function generateSingleWallet() {
 		$("#generatedWallet").html(getErrorText("You must enter a nickname for your wallet.")).fadeIn(50).fadeOut(3000);
 	} else if ($.inArray(nickname, SavedNickNames) > -1) {
 		$("#generatedWallet").html(getErrorText("Nickname is already in use. Please use different nickname.")).fadeIn(50).fadeOut(3000);
-	} else if (password==nickname) {
+	} else if (password == nickname) {
 		$("#generatedWallet").html(getErrorText("Password cannot be same as the the nickname")).fadeIn(50).fadeOut(3000);
 	} else {
 		var acc = new Accounts();
@@ -620,9 +717,9 @@ function generateSingleWallet() {
 			} else {
 				$("#generatedWallet").html(getSuccessText("New Wallet Generated! " + nickname + ":" + address)).fadeIn(50).fadeOut(5000);
 				setNickNames();
-                $("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked",true);
-                $('input[type=radio][name=typeOfKeyRadio]').change();
-                $('*[showid="paneWallets"]').click();
+				$("input[name=typeOfKeyRadio][value='gennewwallet']").prop("checked", true);
+				$('input[type=radio][name=typeOfKeyRadio]').change();
+				$('*[showid="paneWallets"]').click();
 			}
 		});
 		acc.clear();
