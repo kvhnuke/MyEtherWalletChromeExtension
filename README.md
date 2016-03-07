@@ -76,6 +76,22 @@ TODO. If you want to get involved, reach out to us.
 [View all the ways you can reach us here.](https://www.myetherwallet.com/#contact).
 
 
-### TODO
+
+### TODO / In Progress
+
+#### .com & CX
+- Global - Implement Checksums
+- Send Transactions - display in whatever the radio button says, not WEI
+- Send Transactions - Add optional custom gas limit / data on standard send transaction tab
+- Global - Modularize the JS to use across .com and CX
+- Generate Wallet / Bulk Generate - When generating a new wallet, the password is shown in plaintext instead of dots. I would rather have them shown as dots, perhaps with a optional ticker to show the plaintext. (from reddit thread)
+
+#### just .com
+- View Wallet Details - Add unencrypted JSON option
+- View Wallet Details - Add unencrypted -> Encrypted option
+- Offline Transactions "Would be great to have a feature where it automatically generates QR code for signed transaction (show the QR code along the signed transaction box), which will totally removes the risks for using a USB to connect to an offline computer to download the signed transaction then broadcast into a networked computer." https://www.reddit.com/user/Bitnicity
+
+#### just CX
 - Would be nice if on quick send it defaulted to the only wallet you have if you have just one created. (from reddit thread)
-- When generating a new wallet, the password is shown in plaintext instead of dots. I would rather have them shown as dots, perhaps with a optional ticker to show the plaintext. (from reddit thread)
+- Push New Generate Wallet Tab Frontend
+- Push New FAQ Frontend
