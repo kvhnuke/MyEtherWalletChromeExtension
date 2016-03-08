@@ -76,11 +76,9 @@ TODO. If you want to get involved, reach out to us.
 [View all the ways you can reach us here.](https://www.myetherwallet.com/#contact).
 
 
-
 ### TODO / In Progress
 
 #### .com & CX
-- Global - Implement Checksums
 - Send Transactions - display in whatever the radio button says, not WEI
 - Send Transactions - Add optional custom gas limit / data on standard send transaction tab
 - Global - Modularize the JS to use across .com and CX
@@ -92,6 +90,8 @@ TODO. If you want to get involved, reach out to us.
 - Offline Transactions "Would be great to have a feature where it automatically generates QR code for signed transaction (show the QR code along the signed transaction box), which will totally removes the risks for using a USB to connect to an offline computer to download the signed transaction then broadcast into a networked computer." https://www.reddit.com/user/Bitnicity
 
 #### just CX
+- Global - Implement Checksums
 - Would be nice if on quick send it defaulted to the only wallet you have if you have just one created. (from reddit thread)
+- The watch address doesn't show in the popup view from the extension button in the browser bar.
 - Push New Generate Wallet Tab Frontend
 - Push New FAQ Frontend
