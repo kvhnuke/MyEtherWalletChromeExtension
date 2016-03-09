@@ -753,3 +753,24 @@ function printQRcode() {
 	});
 	openPrintPaperWallets(JSON.stringify(jsonarr));
 }
+
+$(document).ready(function() {
+	// collapsing elements on offline tx and help
+	$(".collapsePanel.collapsed").slideUp();
+	$(".collapseButton").click(function() {
+		var collapseButton = $(this);
+		var collapseContainer = $(this).parents(".collapseContainer");
+		var collapsePanel = collapseContainer.children( ".collapsePanel" );
+		collapsePanel.slideToggle();
+		if ( collapseButton.html() == "-") {
+			collapseButton.html("+");
+		} else {
+			collapseButton.html("-");
+		}
+	});
+
+	// ontap hovers
+	$(".account-help-icon").click(function() {
+		$(this).children( ".account-help-text" ).toggle();
+	});
+});

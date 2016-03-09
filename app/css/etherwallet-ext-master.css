@@ -5560,15 +5560,38 @@ input[type=radio] {
   font-size: 13px;
   background: white;
   padding: 5px;
-  width: 230px;
+  width: 280px;
   top: -5px;
   left: 30px;
   border: 1px solid #CDCDCD;
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(100, 100, 100, 0.2);
+  z-index: 999;
 }
 .account-help-icon:hover .account-help-text {
   display: block;
+}
+@media screen and (max-width: 767px) {
+  .account-help-icon {
+    width: 100%;
+  }
+  .account-help-icon svg {
+    float: left;
+    margin-right: 5px;
+    margin-top: 7px;
+  }
+  .account-help-icon .account-help-text {
+    display: block;
+    position: static;
+    width: 100%;
+    border: none;
+    box-shadow: 0px 0px 0px #fff;
+    padding: 5px 0px 0px 30px;
+    font-weight: 300;
+  }
+  .form-group {
+    margin: 15px 0;
+  }
 }
 .form-control,
 #accountAddress,
@@ -5584,6 +5607,13 @@ input[type=radio] {
 }
 .mono {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.collapseButton {
+  cursor: pointer;
+  width: 15px;
+  margin: 0 0 0 -21px;
+  display: inline-block;
+  padding: 0 5px;
 }
 #etherWalletPopUp {
   padding: 25px 8px 10px;
