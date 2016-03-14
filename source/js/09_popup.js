@@ -24,7 +24,7 @@ function bindPopElements() {
 			var weiAmount = toWei(sendAmount, etherUnit);
 			$("#confirmAmount").html(sendAmount);
 			$("#confirmCurrancy").html(etherUnit);
-			$("#confirmAddress").html(toAddress);
+			$("#confirmAddress").html(toChecksumAddress(toAddress));
             $("#popupNickName").html(nickName);
 			$("#popupConfirmSend").show();
 			$("#sendTransMain").hide();
@@ -58,7 +58,7 @@ function bindPopElements() {
 }
 
 function decryptAndSendTx() {
-	var addr = $('input[type=radio][name=selectedWallet]:checked').val();
+	var addr = $('input[type=radio][name=selectedWallet]:checked').val().toLowerCase();
 	var pin = $('#sendTransactionPin').val();
 	if (addr == "") {
 		$("#decryptStatus1").html(getErrorText("Please select a wallet.")).fadeIn(50).fadeOut(3000);

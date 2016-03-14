@@ -56,7 +56,7 @@ function bindElements() {
 		});
 	});
 	$("#btndonate").click(function() {
-		$("#sendtxaddress").val('0x7cb57b5a97eabe94205c07890be4c1ad31e486a8');
+		$("#sendtxaddress").val('0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8');
 		$("#donateThanks").show();
 		$("#sendtxaddress").trigger("keyup");
 	});
@@ -417,7 +417,7 @@ function preCreateTransaction() {
 			$("#divsendtranaction").show();
 			$("#confirmAmount").html($('#sendtxamount').val());
 			$("#confirmCurrancy").html(etherUnit);
-			$("#confirmAddress").html(toAddress);
+			$("#confirmAddress").html(toChecksumAddress(toAddress));
 		}, function(err) {
 			$("#txcreatestatus").html(getErrorText(err)).fadeIn(50).fadeOut(3000);
 			$("#divtransactionTAs").hide();
@@ -569,7 +569,7 @@ function formatCurrency(n, currency) {
 }
 
 function walletDecryptSuccess(id) {
-	$("#accountAddress" + id).html(formatAddress(strPrivateKeyToAddress(PrivKey), 'hex'));
+	$("#accountAddress" + id).html(toChecksumAddress(formatAddress(strPrivateKeyToAddress(PrivKey)), 'hex'));
 	setWalletBalance(id);
 	$("#decryptStatus" + id).html(getSuccessText('Wallet successfully decrypted')).fadeIn(2000).fadeOut(5000);
 	$("#walletpreview" + id).show();

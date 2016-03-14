@@ -1,4 +1,5 @@
 function getMainPageWalletRow(rid, nick,address){
+    address = toChecksumAddress(address);
     var str = "<tr>\
               <td>"+rid+"</td>\
               <td id=\"accountNickMainTbl-"+rid+"\">"+nick+"</td>\
@@ -15,6 +16,7 @@ function getMainPageWalletRow(rid, nick,address){
     return str;
 }
 function getMainPageWatchOnlyRow(rid, nick,address){
+    address = toChecksumAddress(address);
     var str = "<tr>\
               <td>"+rid+"</td>\
               <td id=\"accountNickWatchOnly-"+rid+"\">"+nick+"</td>\
@@ -29,6 +31,7 @@ function getMainPageWatchOnlyRow(rid, nick,address){
     return str;
 }
 function getAccountInfoRow(rid,address, nick){
+    address = toChecksumAddress(address);
     var str = "<tr>\
         <td>\
         <div style='display:none;' id='accountAddressPopMB-"+rid+"'>"+address+"</div>\
@@ -39,6 +42,7 @@ function getAccountInfoRow(rid,address, nick){
     return str;
 }
 function getQuickSendRow(rid,address, nick){
+    address = toChecksumAddress(address);
     var str = "<tr>\
         <td>\
           <label><label><input type=\"radio\" name=\"selectedWallet\" value=\""+address+"\"><strong>"+nick+"</strong></label>\
