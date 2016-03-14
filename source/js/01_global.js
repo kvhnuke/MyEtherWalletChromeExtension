@@ -116,7 +116,7 @@ function bindElements() {
 						$("#viewWalletDiv").show();
 						$("#qrcodeAdd").empty();
 						$('#addressIdenticon').css("background-image", 'url(' + blockies.create({
-							seed: toChecksumAddress(ethAccAddress),
+							seed: ethAccAddress.toLowerCase(),
 							size: 8,
 							scale: 16
 						}).toDataURL() + ')');
