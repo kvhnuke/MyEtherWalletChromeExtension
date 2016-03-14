@@ -93,5 +93,3 @@ TODO. If you want to get involved, reach out to us.
 - Global - Implement Checksums
 - Would be nice if on quick send it defaulted to the only wallet you have if you have just one created. (from reddit thread)
 - The watch address doesn't show in the popup view from the extension button in the browser bar.
-- Push New Generate Wallet Tab Frontend
-- Push New FAQ Frontend
