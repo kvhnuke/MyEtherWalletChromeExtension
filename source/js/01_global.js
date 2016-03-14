@@ -109,14 +109,14 @@ function bindElements() {
 						var encPriv = JSON.parse(data[ethAccAddress]).priv;
 						var pkey = decryptTxtPrivKey(encPriv, pin);
 						$("#walletNickname").html(nickname);
-						$("#address").val(ethAccAddress);
+						$("#address").val(toChecksumAddress(ethAccAddress));
 						$("#privkey").val(pkey);
 						$("#privkeyenc").val(encPriv);
 						$("#qrcodeAdd").empty();
 						$("#viewWalletDiv").show();
 						$("#qrcodeAdd").empty();
 						$('#addressIdenticon').css("background-image", 'url(' + blockies.create({
-							seed: ethAccAddress,
+							seed: toChecksumAddress(ethAccAddress),
 							size: 8,
 							scale: 16
 						}).toDataURL() + ')');
@@ -491,7 +491,7 @@ function addEditEvents() {
 		var nickname = $("#accountNickMainTbl-" + editval).html();
 		var walAddress = $("#accountAddressMainTbl-" + editval).html();
 		$("#walletNicknameEdit").html(nickname);
-		$('#editWalletAddress').val(walAddress);
+		$('#editWalletAddress').val(walAddress.toLowerCase());
 		$("#editWallet").modal("show");
 	});
 	$(".mainWalletDelete").unbind().click(function() {
@@ -499,12 +499,12 @@ function addEditEvents() {
 		var nickname = $("#accountNickMainTbl-" + deleteVal).html();
 		var walAddress = $("#accountAddressMainTbl-" + deleteVal).html();
 		$("#walletNicknameDelete").html(nickname);
-		$('#deleteWalletAddress').val(walAddress);
+		$('#deleteWalletAddress').val(walAddress.toLowerCase());
 		$("#removeWallet").modal("show");
 	});
 	$(".WatchOnlyWalletDelete").unbind().click(function() {
 		var deleteVal = $(this).attr('deleteVal');
-		var walAddress = $("#accountAddressWatchOnly-" + deleteVal).html();
+		var walAddress = $("#accountAddressWatchOnly-" + deleteVal).html().toLowerCase();
 		deleteAccount(walAddress, function() {
 			reloadMainPageWallets();
 		});
@@ -512,7 +512,7 @@ function addEditEvents() {
 	$(".mainWalletView").unbind().click(function() {
 		var viewVal = $(this).attr('viewVal');
 		var nickname = $("#accountNickMainTbl-" + viewVal).html();
-		var walAddress = $("#accountAddressMainTbl-" + viewVal).html();
+		var walAddress = $("#accountAddressMainTbl-" + viewVal).html().toLowerCase();
 		$("#walletNicknameView").html(nickname);
 		$('#viewWalletAddress').val(walAddress);
 		$("#viewWalletDetails").modal("show");
@@ -748,7 +748,7 @@ function printQRcode() {
 	var privkey = $("#privkey").val();
 	var jsonarr = [];
 	jsonarr.push({
-		address: address,
+		address: toChecksumAddress(address),
 		private: privkey
 	});
 	openPrintPaperWallets(JSON.stringify(jsonarr));
