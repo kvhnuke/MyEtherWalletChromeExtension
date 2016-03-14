@@ -275,7 +275,13 @@ function bindElements() {
 		}
 	});
 	$('#sendtxaddress').on('paste, keyup', function() {
+	    $('.addressvalidateIdenticon').css("background-image",'');
 		if (validateEtherAddress($('#sendtxaddress').val())) {
+		  $('.addressvalidateIdenticon').css("background-image", 'url(' + blockies.create({
+							seed: $('#sendtxaddress').val().toLowerCase(),
+							size: 8,
+							scale: 16
+						}).toDataURL() + ')');
 			$("#addressvalidate").html(getSuccessText('Address is valid')).fadeIn(50);
 		} else if ($('#sendtxaddress').val() == "") {
 			$("#addressvalidate").html('');
